@@ -10,10 +10,10 @@ export class PlacesList extends Component {
       return (
         <div className="place" key={index}>
           <div className="place-content">
-            <div className="place-name">{name}</div>
-            <div className="place-stars">{stars} Stars</div>
-            <div className="place-reviews">{reviews} Reviews</div>
-            <div className="place-address">{address}</div>
+            <h3 className="place-name">{name}</h3>
+            <p className="place-stars">{stars} Stars</p>
+            <p className="place-reviews">{reviews} Reviews</p>
+            <p className="place-address">{address}</p>
           </div>
         </div>
       );
