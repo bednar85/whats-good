@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Places from "./Places/Places";
+import Places from './Places/Places';
 
 const App = () => {
   return (
