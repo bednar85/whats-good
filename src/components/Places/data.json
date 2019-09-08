@@ -1,0 +1,452 @@
+[
+  {
+    "name": "La Colombe Coffee",
+    "stars": 4.5,
+    "reviews": 463,
+    "categories": ["Coffee & Tea"],
+    "address": "1335 Frankford Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 9:00 pm",
+        "opens": "7:00",
+        "closes": "21"
+      },
+      "Sat": {
+        "display": "7:00 am - 9:00 pm",
+        "opens": "7:00",
+        "closes": "21"
+      },
+      "Sun": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      }
+    }
+  },
+  {
+    "name": "Steap and Grind",
+    "stars": 4,
+    "reviews": 123,
+    "categories": ["Coffee & Tea", "Sandwiches"],
+    "address": "1619 Frankford Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Sat": {
+        "display": "8:00 am - 6:00 pm",
+        "opens": "8:00",
+        "closes": "18:00"
+      },
+      "Sun": {
+        "display": "8:00 am - 6:00 pm",
+        "opens": "8:00",
+        "closes": "18:00"
+      }
+    }
+  },
+  {
+    "name": "ReAnimator Coffee",
+    "stars": 4,
+    "reviews": 98,
+    "categories": ["Coffee & Tea"],
+    "address": "1523 E Susquehanna Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "6:30 am - 7:00 pm",
+        "opens": "6:30",
+        "closes": "19:00"
+      },
+      "Tue": {
+        "display": "6:30 am - 7:00 pm",
+        "opens": "6:30",
+        "closes": "19:00"
+      },
+      "Wed": {
+        "display": "6:30 am - 7:00 pm",
+        "opens": "6:30",
+        "closes": "19:00"
+      },
+      "Thu": {
+        "display": "6:30 am - 7:00 pm",
+        "opens": "6:30",
+        "closes": "19:00"
+      },
+      "Fri": {
+        "display": "6:30 am - 7:00 pm",
+        "opens": "6:30",
+        "closes": "19:00"
+      },
+      "Sat": {
+        "display": "8:00 am - 7:00 pm",
+        "opens": "8:00",
+        "closes": "19:00"
+      },
+      "Sun": {
+        "display": "8:00 am - 7:00 pm",
+        "opens": "8:00",
+        "closes": "19:00"
+      }
+    }
+  },
+  {
+    "name": "Flow State CoffeeBar",
+    "stars": 4.5,
+    "reviews": 19,
+    "categories": ["Cafes", "Coffee & Tea", "Gelato"],
+    "address": "2413 Frankford Ave",
+    "neighborhood": "Kensington",
+    "hours": {
+      "Mon": {
+        "display": "Closed",
+        "opens": null,
+        "closes": null
+      },
+      "Tue": {
+        "display": "8:00 am - 3:00 pm",
+        "opens": "8:00",
+        "closes": "15:00"
+      },
+      "Wed": {
+        "display": "8:00 am - 3:00 pm",
+        "opens": "8:00",
+        "closes": "15:00"
+      },
+      "Thu": {
+        "display": "8:00 am - 5:00 pm",
+        "opens": "8:00",
+        "closes": "17:00"
+      },
+      "Fri": {
+        "display": "8:00 am - 5:00 pm",
+        "opens": "8:00",
+        "closes": "17:00"
+      },
+      "Sat": {
+        "display": "9:00 am - 5:00 pm",
+        "opens": "9:00",
+        "closes": "17:00"
+      },
+      "Sun": {
+        "display": "9:00 am - 5:00 pm",
+        "opens": "9:00",
+        "closes": "17:00"
+      }
+    }
+  },
+  {
+    "name": "Milkcrate Cafe",
+    "stars": 4.5,
+    "reviews": 214,
+    "categories": ["Coffee & Tea", "Breakfast & Brunch", "Vinyl Records"],
+    "address": "400 E Girard Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Sat": {
+        "display": "7:00 am - 5:00 pm",
+        "opens": "7:00",
+        "closes": "17:00"
+      },
+      "Sun": {
+        "display": "7:00 am - 5:00 pm",
+        "opens": "7:00",
+        "closes": "17:00"
+      }
+    }
+  },
+  {
+    "name": "Gryphon Cafe",
+    "stars": 4,
+    "reviews": 26,
+    "categories": ["Cafes"],
+    "address": "100 W Oxford St",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 3:00 pm",
+        "opens": "7:00",
+        "closes": "15:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 3:00 pm",
+        "opens": "7:00",
+        "closes": "15:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 3:00 pm",
+        "opens": "7:00",
+        "closes": "15:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 3:00 pm",
+        "opens": "7:00",
+        "closes": "15:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 3:00 pm",
+        "opens": "7:00",
+        "closes": "15:00"
+      },
+      "Sat": {
+        "display": "8:00 am - 3:00 pm",
+        "opens": "8:00",
+        "closes": "15:00"
+      },
+      "Sun": {
+        "display": "Closed",
+        "opens": null,
+        "closes": null
+      }
+    }
+  },
+  {
+    "name": "Cake Life Bake Shop",
+    "stars": 4.5,
+    "reviews": 200,
+    "categories": ["Bakeries", "Desserts", "Cafes"],
+    "address": "1306 Frankford Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "Closed",
+        "opens": null,
+        "closes": null
+      },
+      "Tue": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 7:00 pm",
+        "opens": "7:00",
+        "closes": "19:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 10:00 pm",
+        "opens": "7:00",
+        "closes": "22:00"
+      },
+      "Sat": {
+        "display": "7:00 am - 10:00 pm",
+        "opens": "7:00",
+        "closes": "22:00"
+      },
+      "Sun": {
+        "display": "8:00 am - 7:00 pm",
+        "opens": "8:00",
+        "closes": "19:00"
+      }
+    }
+  },
+  {
+    "name": "Front Street Cafe",
+    "stars": 4,
+    "reviews": 550,
+    "categories": ["Bars", "American (New)", "Breakfast & Brunch"],
+    "address": "1253 N Front St",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 12:00 am",
+        "opens": "7:00",
+        "closes": "24:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 12:00 am",
+        "opens": "7:00",
+        "closes": "24:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 12:00 am",
+        "opens": "7:00",
+        "closes": "24:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 12:00 am",
+        "opens": "7:00",
+        "closes": "24:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 2:00 am",
+        "opens": "7:00",
+        "closes": "26:00"
+      },
+      "Sat": {
+        "display": "7:00 am - 2:00 am",
+        "opens": "7:00",
+        "closes": "26:00"
+      },
+      "Sun": {
+        "display": "7:00 am - 12:00 am",
+        "opens": "7:00",
+        "closes": "24:00"
+      }
+    }
+  },
+  {
+    "name": "Hello Donuts + Coffee",
+    "stars": 4.5,
+    "reviews": 8,
+    "categories": ["Donuts", "Coffee & Tea", "Breakfast & Brunch"],
+    "address": "2557 Amber St",
+    "neighborhood": "Kensington",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 6:00 pm",
+        "opens": "7:00",
+        "closes": "18:00"
+      },
+      "Sat": {
+        "display": "8:00 am - 5:00 pm",
+        "opens": "8:00",
+        "closes": "17:00"
+      },
+      "Sun": {
+        "display": "8:00 am - 5:00 pm",
+        "opens": "8:00",
+        "closes": "17:00"
+      }
+    }
+  },
+  {
+    "name": "Philly Style Bagels",
+    "stars": 4,
+    "reviews": 153,
+    "categories": ["Bagels"],
+    "address": "1451 E Columbia Ave",
+    "neighborhood": "Fishtown",
+    "hours": {
+      "Mon": {
+        "display": "7:00 am - 2:00 pm",
+        "opens": "7:00",
+        "closes": "14:00"
+      },
+      "Tue": {
+        "display": "7:00 am - 2:00 pm",
+        "opens": "7:00",
+        "closes": "14:00"
+      },
+      "Wed": {
+        "display": "7:00 am - 2:00 pm",
+        "opens": "7:00",
+        "closes": "14:00"
+      },
+      "Thu": {
+        "display": "7:00 am - 2:00 pm",
+        "opens": "7:00",
+        "closes": "14:00"
+      },
+      "Fri": {
+        "display": "7:00 am - 2:00 pm",
+        "opens": "7:00",
+        "closes": "14:00"
+      },
+      "Sat": {
+        "display": "8:00 am - 2:00 pm",
+        "opens": "8:00",
+        "closes": "14:00"
+      },
+      "Sun": {
+        "display": "8:00 am - 2:00 pm",
+        "opens": "8:00",
+        "closes": "14:00"
+      }
+    }
+  }
+]
