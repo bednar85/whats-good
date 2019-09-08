@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import data from './data';
-
 export class PlacesList extends Component {
   get places() {
+    const { data } = this.props;
+
     return data.map((place, index) => {
       const { name, stars, reviews, address } = place;
 
