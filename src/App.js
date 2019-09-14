@@ -10,13 +10,10 @@ import PlacesList from './components/PlacesList/PlacesList';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Counter />
-          <FilterBar />
-          <PlacesList />
-        </header>
+      <div className="app">
+        <Counter />
+        <FilterBar />
+        <PlacesList />
       </div>
     );
   }
