@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup
-} from '@material-ui/core';
+import { Radio, Input } from 'antd';
 
 export class FilterBar extends Component {
   constructor(props) {
@@ -27,41 +20,47 @@ export class FilterBar extends Component {
 
   render() {
     const { sortBy } = this.state;
+
+    const radioStyle = {
+      display: 'block',
+      height: '30px',
+      lineHeight: '30px',
+    };
     
     return (
       <div>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Sort By</FormLabel>
-          <RadioGroup
-            aria-label="Sort By"
-            name="sortBy"
-            value={sortBy}
-            onChange={this.handleChange}
+        <Radio.Group
+          name="sortBy"
+          onChange={this.handleChange}
+          value={this.state.sortBy}
+        >
+          <Radio
+            style={radioStyle}
+            disabled
+            value="Distance From You"
           >
-            <FormControlLabel
-              value="Distance From You"
-              disabled
-              control={<Radio color="primary" />}
-              label="Distance From You"
-            />
-            <FormControlLabel
-              value="Distance From Selected Location"
-              disabled
-              control={<Radio color="primary" />}
-              label="Distance From Selected Location"
-            />
-            <FormControlLabel
-              value="Highest Rated"
-              control={<Radio color="primary" />}
-              label="Highest Rated"
-            />
-            <FormControlLabel
-              value="Most Reviewed"
-              control={<Radio color="primary" />}
-              label="Most Reviewed"
-            />
-          </RadioGroup>
-        </FormControl>
+            Distance From You
+          </Radio>
+          <Radio
+            style={radioStyle}
+            disabled
+            value="Distance From Selected Location"
+          >
+            Distance From Selected Location
+          </Radio>
+          <Radio
+            style={radioStyle}
+            value="Highest Rated"
+          >
+            Highest Rated
+          </Radio>
+          <Radio
+            style={radioStyle}
+            value="Most Reviewed"
+          >
+            Most Reviewed
+          </Radio>
+        </Radio.Group>
       </div>
     );
   }
