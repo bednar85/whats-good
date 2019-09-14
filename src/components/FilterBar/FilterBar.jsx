@@ -1,34 +1,67 @@
 import React, { Component } from 'react';
+import {
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  FormLabel,
+  Radio,
+  RadioGroup
+} from '@material-ui/core';
 
 export class FilterBar extends Component {
   constructor(props) {
     super(props);
 
-    this.onSort = this.onSort.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       sortBy: 'Highest Rated'
     };
   }
 
-  onSort(sortBy) {
-    console.log('');
-    console.log('FilterBar - onSort');
-    console.log('  sortBy:', sortBy);
-
+  handleChange = event => {
     this.setState({
-      sortBy
+      [event.target.name]: event.target.value
     });
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { sortBy } = this.state;
     
     return (
       <div>
-        <button onClick={() => this.onSort('Highest Rated')}>Highest Rated</button>
-        <button onClick={() => this.onSort('Most Reviewed')}>Most Reviewed</button>
-        <button onClick={() => handleSubmit(this.state)}>Submit</button>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Sort By</FormLabel>
+          <RadioGroup
+            aria-label="Sort By"
+            name="sortBy"
+            value={sortBy}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel
+              value="Distance From You"
+              disabled
+              control={<Radio color="primary" />}
+              label="Distance From You"
+            />
+            <FormControlLabel
+              value="Distance From Selected Location"
+              disabled
+              control={<Radio color="primary" />}
+              label="Distance From Selected Location"
+            />
+            <FormControlLabel
+              value="Highest Rated"
+              control={<Radio color="primary" />}
+              label="Highest Rated"
+            />
+            <FormControlLabel
+              value="Most Reviewed"
+              control={<Radio color="primary" />}
+              label="Most Reviewed"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
     );
   }
