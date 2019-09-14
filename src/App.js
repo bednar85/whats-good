@@ -1,6 +1,35 @@
 import React, { Component } from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
+
+import Counter from './components/Counter';
+
+const initialState = {
+  count: 0
+}
+
+const counterReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case 'INCREMENT':
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    case 'DECREMENT':
+      return {
+        ...state,
+        count: state.count - 1 < 0 ? 0 : state.count - 1
+      };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(counterReducer);
+
+console.log(store);
 
 class App extends Component {
   render() {
@@ -8,17 +37,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Provider store={store}>
+            <Counter />
+          </Provider>
         </header>
       </div>
     );
