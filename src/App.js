@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
-import Counter from './components/Counter';
+import Counter from './components/Counter/Counter';
+import FilterBar from './components/FilterBar/FilterBar';
+import PlacesList from './components/PlacesList/PlacesList';
 
 const initialState = {
   count: 0
@@ -39,6 +41,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <Provider store={store}>
             <Counter />
+            <FilterBar />
+            <PlacesList />
           </Provider>
         </header>
       </div>
