@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
-import { Radio, Input } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { Radio } from 'antd';
+
+import { actions } from '../../modules/application';
 
 export class FilterBar extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
+    this.actions = props.actions;
 
-    this.state = {
-      sortBy: 'Highest Rated',
-      distance: 1.5, 
-      hours: "Show All"
-    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = event => {
-    this.setState({
+    this.actions.updateFilters({
       [event.target.name]: event.target.value
     });
   }
 
   render() {
-    const { sortBy } = this.state;
+    const { sortBy, distance, hours } = this.props.filters;
+
+    console.log(this.props.filters);
 
     const radioGroupStyles = {
       verticalAlign: 'top'
@@ -39,7 +42,7 @@ export class FilterBar extends Component {
           name="sortBy"
           style={radioGroupStyles}
           onChange={this.handleChange}
-          value={this.state.sortBy}
+          value={sortBy}
         >
           <Radio
             style={radioStyles}
@@ -72,7 +75,7 @@ export class FilterBar extends Component {
           name="distance"
           style={radioGroupStyles}
           onChange={this.handleChange}
-          value={this.state.distance}
+          value={distance}
         >
           <Radio
             style={radioStyles}
@@ -107,7 +110,7 @@ export class FilterBar extends Component {
           name="hours"
           style={radioGroupStyles}
           onChange={this.handleChange}
-          value={this.state.hours}
+          value={hours}
         >
           <Radio
             style={radioStyles}
@@ -128,4 +131,15 @@ export class FilterBar extends Component {
   }
 }
 
-export default FilterBar;
+const mapStateToProps = state => ({
+  filters: state.filters
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(
+    Object.assign({}, actions),
+    dispatch
+  )
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBar);

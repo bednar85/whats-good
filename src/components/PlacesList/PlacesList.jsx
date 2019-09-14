@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import data from '../../api/data';
 
 export class PlacesList extends Component {
+  get sortedData() {
+    const { filters } = this.props;
+
+    let sortKey = '';
+
+    switch(filters.sortBy) {
+      case 'Highest Rated':
+        sortKey = 'stars';
+        break;
+      case 'Most Reviewed':
+        sortKey = 'reviews';
+        break;
+      default:
+        sortKey = 'stars';
+    }
+    
+    return data.sort((a, b) => b[sortKey] - a[sortKey]);
+  }
+
   get places() {
-    return data.map((place, index) => {
+    return this.sortedData.map((place, index) => {
       const { name, stars, reviews, address } = place;
 
       return (
@@ -27,4 +47,8 @@ export class PlacesList extends Component {
   }
 }
 
-export default PlacesList;
+const mapStateToProps = state => ({
+  filters: state.filters
+});
+
+export default connect(mapStateToProps)(PlacesList);
