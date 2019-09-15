@@ -54,7 +54,7 @@ export class PlacesList extends Component {
 
   get sortedAndFilteredData() {
     const { filters } = this.props;
-    const { distance, isOpenNow, sortBy }  = filters;
+    const { distance, isOpenNow, sortBy } = filters;
 
     const data = this.preprocessData;
 
