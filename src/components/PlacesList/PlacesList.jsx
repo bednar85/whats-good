@@ -12,10 +12,10 @@ export class PlacesList extends Component {
   constructor(props) {
     super(props);
 
-    this.getHoursData = this.getHoursData.bind(this);
+    this.setHoursData = this.setHoursData.bind(this);
   }
 
-  getHoursData(hours) {
+  setHoursData(hours) {
     const today = moment().format('ddd');
     const tomorrow = moment().add(1, 'day').format('ddd');
 
@@ -45,8 +45,21 @@ export class PlacesList extends Component {
     };
   }
 
-  get sortedData() {
+  get preprocessData() {
+    return data.map(datum => {
+      const { hours } = datum;
+
+      return {
+        ...datum,
+        ...this.setHoursData(hours)
+      }
+    })
+  }
+
+  get sortedAndFilteredData() {
     const { filters } = this.props;
+
+    const data = this.preprocessData;
 
     let sortKey = '';
 
@@ -61,31 +74,42 @@ export class PlacesList extends Component {
         sortKey = 'stars';
     }
     
-    return data.sort((a, b) => b[sortKey] - a[sortKey]);
+    return filters.openNow
+      ? data.filter(d => d.isOpen).sort((a, b) => b[sortKey] - a[sortKey])
+      : data.sort((a, b) => b[sortKey] - a[sortKey]).filter(d => d);
   }
 
   get places() {
-    return this.sortedData.map((place, index) => {
-      const { name, stars, reviews, address, hours } = place;
-      const { todaysHours, tomorrowsHours, isOpen } = this.getHoursData(hours);
+    return this.sortedAndFilteredData.length
+      ? this.sortedAndFilteredData.map((place, index) => {
+        const {
+          address,
+          isOpen,
+          name,
+          reviews,
+          stars,
+          todaysHours,
+          tomorrowsHours
+        } = place;
 
-      const closedClass = !isOpen && 'place--is-closed';
+        const closedClass = !isOpen && 'place--is-closed';
 
-      return (
-        <div className={`place ${closedClass}`} key={index}>
-          <div className="place-content">
-            <Title className="place-name" level={4}>{name}</Title>
-            <Rate disabled allowHalf defaultValue={stars} />
-            <Text className="place-reviews">{reviews} Reviews</Text>
-            <Text className="place-address">{address}</Text>
-            <div className="place-hours">
-              <Text className="place-hours">{todaysHours}</Text>
-              <Text className="place-hours">{tomorrowsHours}</Text>
+        return (
+          <div className={`place ${closedClass}`} key={index}>
+            <div className="place-content">
+              <Title className="place-name" level={4}>{name}</Title>
+              <Rate disabled allowHalf defaultValue={stars} />
+              <Text className="place-reviews">{reviews} Reviews</Text>
+              <Text className="place-address">{address}</Text>
+              <div className="place-hours">
+                <Text className="place-hours">{todaysHours}</Text>
+                <Text className="place-hours">{tomorrowsHours}</Text>
+              </div>
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      })
+      : <div>Sorry, there are no locations that match the filters you've selected.</div>;
   }
 
   render() {
