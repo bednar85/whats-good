@@ -75,7 +75,7 @@ export class PlacesList extends Component {
     }
 
     const filteredData = isOpenNow
-      ? data.filter(d => d.distance <= distance && d.isOpen)
+      ? data.filter(d => d.distance <= distance && d.isOpen === true)
       : data.filter(d => d.distance <= distance);
     
     // sort ascending (0-100) if the sortKey is distance
