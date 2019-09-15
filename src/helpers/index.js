@@ -5,6 +5,8 @@ const degreesToRadians = (deg) => {
   return deg * Math.PI / 180;
 }
 
+// Revisit this and replace with getting the distance using a mapping API like Google or Bing
+// https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
 export const getDistance = (lat1, lon1, lat2, lon2) => {
   lat1 = degreesToRadians(lat1);
   lat2 = degreesToRadians(lat2);
