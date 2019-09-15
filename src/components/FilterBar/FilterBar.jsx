@@ -180,7 +180,7 @@ export class FilterBar extends Component {
             openNow: !filters.openNow
           })}
         />
-        <label for="openNow">Open Now Only</label>
+        <label htmlFor="openNow">Open Now Only</label>
       </div>
     );
   }
