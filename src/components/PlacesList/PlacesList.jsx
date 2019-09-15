@@ -12,16 +12,16 @@ export class PlacesList extends Component {
   constructor(props) {
     super(props);
 
-    this.placesListClass = 'wg-places-list'
+    this.placesListClass = 'wg-places-list';
     this.placeClass = 'wg-place';
 
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
 
     this.state = {
       currentLocation: null
-    }
+    };
   }
-  
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
   }
@@ -43,27 +43,28 @@ export class PlacesList extends Component {
 
       const { currentLocation } = this.state;
 
-      const distance = 
-        currentLocation && currentLocation.latitude && currentLocation.longitude
+      const distance = currentLocation
+        && currentLocation.latitude
+        && currentLocation.longitude
         && getDistance(currentLocation.latitude, currentLocation.longitude, latitude, longitude);
 
       return {
         ...datum,
         ...getHours(hours),
         distance
-      }
-    })
+      };
+    });
   }
 
   get sortedAndFilteredData() {
     const { filters } = this.props;
     const { distance, isOpenNow, sortBy } = filters;
 
-    const data = this.preprocessData;
+    const initialData = this.preprocessData;
 
     let sortKey = '';
 
-    switch(sortBy) {
+    switch (sortBy) {
       case 'Closest To You':
         sortKey = 'distance';
         break;
@@ -78,9 +79,9 @@ export class PlacesList extends Component {
     }
 
     const filteredData = isOpenNow
-      ? data.filter(d => d.distance <= distance && d.isOpen === true)
-      : data.filter(d => d.distance <= distance);
-    
+      ? initialData.filter(d => d.distance <= distance && d.isOpen === true)
+      : initialData.filter(d => d.distance <= distance);
+
     // sort ascending (0-100) if the sortKey is distance
     return sortKey === 'distance'
       ? filteredData.sort((a, b) => a[sortKey] - b[sortKey])
@@ -114,7 +115,10 @@ export class PlacesList extends Component {
                   allowHalf
                   defaultValue={stars}
                 />
-                <Text className={`${this.placeClass}-reviews`}>{reviews} Reviews</Text>
+                <Text className={`${this.placeClass}-reviews`}>
+                  {reviews}
+                  Reviews
+                </Text>
                 <div className={`${this.placeClass}-hours-of-operation`}>
                   <Text className={`${this.placeClass}-hours ${this.placeClass}-hours--today`}>{todaysHours}</Text>
                   <Text className={`${this.placeClass}-hours`}>{tomorrowsHours}</Text>
@@ -123,7 +127,15 @@ export class PlacesList extends Component {
               <div className={`${this.placeClass}-secondary-content`}>
                 <div className={`${this.placeClass}-location-details`}>
                   <Text className={`${this.placeClass}-address`}>{address}</Text>
-                  {distance && <Text className={`${this.placeClass}-distance`}>{distance.toFixed(2)} miles away from you</Text>}
+                  {
+                    distance
+                    && (
+                      <Text className={`${this.placeClass}-distance`}>
+                        {distance.toFixed(2)}
+                        miles away from you
+                      </Text>
+                    )
+                  }
                 </div>
               </div>
             </div>

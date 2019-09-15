@@ -15,14 +15,14 @@ export const actions = {
 const initialState = {
   filters: {
     sortBy: 'Highest Rated',
-    distance: 1.5, 
+    distance: 1.5,
     isOpenNow: false
   }
 };
 
 // Reducer
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FILTERS_UPDATE:
       return {
         ...state,
