@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
@@ -9,6 +10,10 @@ import { getDistance, getHours } from '../../helpers/index';
 const { Text, Title } = Typography;
 
 export class PlacesList extends Component {
+  static propTypes = {
+    filters: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -142,7 +147,7 @@ export class PlacesList extends Component {
           </div>
         );
       })
-      : <div>Sorry, there are no locations that match the filters you've selected.</div>;
+      : <div>Sorry, there are no locations that match the filters you&apos;ve selected.</div>;
   }
 
   render() {

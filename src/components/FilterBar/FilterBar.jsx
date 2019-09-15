@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -17,12 +18,17 @@ import { actions } from '../../modules/application';
 const { Title } = Typography;
 
 export class FilterBar extends Component {
+  static propTypes = {
+    actions: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
 
     this.actions = props.actions;
 
-    this.onChange = this.onChange.bind(this);
+    this.onFilterChange = this.onFilterChange.bind(this);
 
     this.radioGroupStyles = {
       verticalAlign: 'top'
@@ -39,19 +45,7 @@ export class FilterBar extends Component {
     };
   }
 
-  showDrawer() {
-    this.setState({
-      visible: true
-    });
-  };
-
-  onClose() {
-    this.setState({
-      visible: false
-    });
-  };
-
-  onChange(event) {
+  onFilterChange(event) {
     this.actions.updateFilters({
       [event.target.name]: event.target.value
     });
@@ -79,11 +73,11 @@ export class FilterBar extends Component {
 
     switch (distance) {
       case 0.5:
-        return ', 4 blocks or less away from you'
+        return ', 4 blocks or less away from you';
       case 1.5:
-        return ', within walking distance of you'
+        return ', within walking distance of you';
       case 5:
-        return ', within bus/subway distance of you'
+        return ', within bus/subway distance of you';
       default:
         return '';
     }
@@ -108,13 +102,13 @@ export class FilterBar extends Component {
 
   get sortByGroup() {
     const { filters } = this.props;
-    const { sortBy } = this.props;
+    const { sortBy } = filters;
 
     return (
       <Radio.Group
         name="sortBy"
         style={this.radioGroupStyles}
-        onChange={this.onChange}
+        onChange={this.onFilterChange}
         value={sortBy}
       >
         <Radio
@@ -141,13 +135,13 @@ export class FilterBar extends Component {
 
   get distanceGroup() {
     const { filters } = this.props;
-    const { distance } = this.props;
+    const { distance } = filters;
 
-    return (  
+    return (
       <Radio.Group
         name="distance"
         style={this.radioGroupStyles}
-        onChange={this.onChange}
+        onChange={this.onFilterChange}
         value={distance}
       >
         <Radio
@@ -178,8 +172,8 @@ export class FilterBar extends Component {
 
     const styles = {
       marginRight: 8
-    }
- 
+    };
+
     return (
       <div>
         <Switch
@@ -195,7 +189,21 @@ export class FilterBar extends Component {
     );
   }
 
+  showDrawer() {
+    this.setState({
+      visible: true
+    });
+  }
+
+  hideDrawer() {
+    this.setState({
+      visible: false
+    });
+  }
+
   render() {
+    const { visible } = this.state;
+
     return (
       <div>
         {this.filterSummary}
@@ -205,8 +213,8 @@ export class FilterBar extends Component {
         <Drawer
           placement="top"
           closable={false}
-          onClose={this.onClose}
-          visible={this.state.visible}
+          onClose={this.hideDrawer}
+          visible={visible}
         >
           <Row gutter={16}>
             <Col span={9}>{this.sortByGroup}</Col>

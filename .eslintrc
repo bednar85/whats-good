@@ -7,8 +7,12 @@
     "node": true
   },
   "rules": {
-    "comma-dangle": ["error", "never"],
     "arrow-parens": 0,
-    "no-mixed-operators": 0
+    "comma-dangle": 0,
+    "import/no-named-as-default": 0,
+    "max-len": ["error", 150],
+    "no-mixed-operators": 0,
+    "react/forbid-prop-types": 0,
+    "react/static-property-placement": 0
   }
 }
