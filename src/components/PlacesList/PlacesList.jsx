@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import { Rate, Typography } from 'antd';
 
 import data from '../../api/data';
+import { getDistance, getHours } from '../../helpers/index';
 
 const { Text, Title } = Typography;
 
@@ -13,8 +13,6 @@ export class PlacesList extends Component {
     super(props);
 
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
-    this.getDistance = this.getDistance.bind(this);
-    this.getHoursData = this.getHoursData.bind(this);
 
     this.state = {
       currentLocation: null
@@ -35,58 +33,6 @@ export class PlacesList extends Component {
       }
     });
   }
-  
-  getDistance(lat1, lng1, lat2, lng2) {
-    // Convert Degress to Radians
-    function Deg2Rad(deg) {
-      return deg * Math.PI / 180;
-    }
-  
-    function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
-      lat1 = Deg2Rad(lat1);
-      lat2 = Deg2Rad(lat2);
-      lon1 = Deg2Rad(lon1);
-      lon2 = Deg2Rad(lon2);
-      // var R = 6371; // km
-      var R = 3959; // miles
-      var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-      var y = (lat2 - lat1);
-      var d = Math.sqrt(x * x + y * y) * R;
-      return d;
-    }
-  
-    return PythagorasEquirectangular( lat1, lng1, lat2, lng2 );
-  }
-
-  getHoursData(hours) {
-    const today = moment().format('ddd');
-    const tomorrow = moment().add(1, 'day').format('ddd');
-
-    const todaysHours = hours[today];
-    const tomorrowsHours = hours[tomorrow];
-
-    let isOpen = undefined;
-
-    if (todaysHours.display === 'Closed') {
-      isOpen = false;
-    } else {
-      const opens = todaysHours.opens.minute
-        ? moment().set('hour', todaysHours.opens.hour, 'minute', todaysHours.opens.minute)
-        : moment().set('hour', todaysHours.opens.hour)
-      
-      const closes = todaysHours.closes.minute
-        ? moment().set('hour', todaysHours.closes.hour, 'minute', todaysHours.closes.minute)
-        : moment().set('hour', todaysHours.closes.hour)
-      
-      isOpen = moment().isBetween(opens, closes, '[)');
-    }
-
-    return {
-      todaysHours: `${today} - ${todaysHours.display}`,
-      tomorrowsHours: `${tomorrow} - ${tomorrowsHours.display}`,
-      isOpen
-    };
-  }
 
   get preprocessData() {
     return data.map(datum => {
@@ -94,11 +40,13 @@ export class PlacesList extends Component {
 
       const { currentLocation } = this.state;
 
-      const distance = currentLocation && currentLocation.latitude && currentLocation.longitude && this.getDistance(currentLocation.latitude, currentLocation.longitude, latitude, longitude);
+      const distance = 
+        currentLocation && currentLocation.latitude && currentLocation.longitude
+        && getDistance(currentLocation.latitude, currentLocation.longitude, latitude, longitude);
 
       return {
         ...datum,
-        ...this.getHoursData(hours),
+        ...getHours(hours),
         distance
       }
     })
