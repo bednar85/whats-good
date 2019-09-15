@@ -189,7 +189,7 @@ export class FilterBar extends Component {
     return (
       <div>
         {this.filterSummary}
-        <Button type="primary" onClick={this.showDrawer}>
+        <Button onClick={this.showDrawer}>
           Show Filters
         </Button>
         <Drawer
