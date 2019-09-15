@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Rate, Typography } from 'antd';
 
 import data from '../../api/data';
-import { getDistance, getHours } from '../../helpers/index';
+import { getDistance, getHours } from '../../utils';
 
 const { Text, Title } = Typography;
 
@@ -132,15 +132,13 @@ export class PlacesList extends Component {
               <div className={`${this.placeClass}-secondary-content`}>
                 <div className={`${this.placeClass}-location-details`}>
                   <Text className={`${this.placeClass}-address`}>{address}</Text>
-                  {
-                    distance
-                    && (
-                      <Text className={`${this.placeClass}-distance`}>
-                        {distance.toFixed(2)}
-                        miles away from you
-                      </Text>
-                    )
-                  }
+                  <Text className={`${this.placeClass}-distance`}>
+                    {
+                      distance
+                        ? `${distance.toFixed(2)} miles away from you`
+                        : 'calculating distance...'
+                    }
+                  </Text>
                 </div>
               </div>
             </div>
