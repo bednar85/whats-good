@@ -16,7 +16,7 @@ const initialState = {
   filters: {
     sortBy: 'Highest Rated',
     distance: 1.5, 
-    openNow: false
+    isOpenNow: false
   }
 };
 

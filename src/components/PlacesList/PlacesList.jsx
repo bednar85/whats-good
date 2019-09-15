@@ -54,12 +54,16 @@ export class PlacesList extends Component {
 
   get sortedAndFilteredData() {
     const { filters } = this.props;
+    const { distance, isOpenNow, sortBy }  = filters;
 
     const data = this.preprocessData;
 
     let sortKey = '';
 
-    switch(filters.sortBy) {
+    switch(sortBy) {
+      case 'Closest To You':
+        sortKey = 'distance';
+        break;
       case 'Highest Rated':
         sortKey = 'stars';
         break;
@@ -69,10 +73,15 @@ export class PlacesList extends Component {
       default:
         sortKey = 'stars';
     }
+
+    const filteredData = isOpenNow
+      ? data.filter(d => d.distance <= distance && d.isOpen)
+      : data.filter(d => d.distance <= distance);
     
-    return filters.openNow
-      ? data.filter(d => d.isOpen).sort((a, b) => b[sortKey] - a[sortKey])
-      : data.sort((a, b) => b[sortKey] - a[sortKey]).filter(d => d);
+    // sort ascending (0-100) if the sortKey is distance
+    return sortKey === 'distance'
+      ? filteredData.sort((a, b) => a[sortKey] - b[sortKey])
+      : filteredData.sort((a, b) => b[sortKey] - a[sortKey]);
   }
 
   get places() {
