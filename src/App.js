@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './App.css';
-
 import FilterBar from './components/FilterBar/FilterBar';
 import PlacesList from './components/PlacesList/PlacesList';
 
