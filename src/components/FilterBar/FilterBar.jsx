@@ -145,7 +145,7 @@ export class FilterBar extends Component {
           style={this.radioStyles}
           value={0.5}
         >
-          Within 4 Blocks
+          Within 4 Blocks (0.5 mi)
         </Radio>
         <Radio
           style={this.radioStyles}
