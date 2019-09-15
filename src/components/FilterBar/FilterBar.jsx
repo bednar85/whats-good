@@ -28,12 +28,14 @@ export class FilterBar extends Component {
 
     this.actions = props.actions;
 
+    this.hideDrawer = this.hideDrawer.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.showDrawer = this.showDrawer.bind(this);
 
     this.radioGroupStyles = {
       verticalAlign: 'top'
     };
-  
+
     this.radioStyles = {
       display: 'block',
       height: '30px',
