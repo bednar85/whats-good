@@ -213,9 +213,10 @@ export class FilterBar extends Component {
           Show Filters
         </Button>
         <Drawer
-          placement="top"
           closable={false}
+          height="auto"
           onClose={this.hideDrawer}
+          placement="top"
           visible={visible}
         >
           <Row gutter={16}>
