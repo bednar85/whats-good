@@ -12,10 +12,53 @@ export class PlacesList extends Component {
   constructor(props) {
     super(props);
 
-    this.setHoursData = this.setHoursData.bind(this);
+    this.getCurrentLocation = this.getCurrentLocation.bind(this);
+    this.getDistance = this.getDistance.bind(this);
+    this.getHoursData = this.getHoursData.bind(this);
+
+    this.state = {
+      currentLocation: null
+    }
+  }
+  
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
   }
 
-  setHoursData(hours) {
+  getCurrentLocation(position) {
+    const { latitude, longitude } = position.coords;
+
+    this.setState({
+      currentLocation: {
+        latitude,
+        longitude
+      }
+    });
+  }
+  
+  getDistance(lat1, lng1, lat2, lng2) {
+    // Convert Degress to Radians
+    function Deg2Rad(deg) {
+      return deg * Math.PI / 180;
+    }
+  
+    function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+      lat1 = Deg2Rad(lat1);
+      lat2 = Deg2Rad(lat2);
+      lon1 = Deg2Rad(lon1);
+      lon2 = Deg2Rad(lon2);
+      // var R = 6371; // km
+      var R = 3959; // miles
+      var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+      var y = (lat2 - lat1);
+      var d = Math.sqrt(x * x + y * y) * R;
+      return d;
+    }
+  
+    return PythagorasEquirectangular( lat1, lng1, lat2, lng2 );
+  }
+
+  getHoursData(hours) {
     const today = moment().format('ddd');
     const tomorrow = moment().add(1, 'day').format('ddd');
 
@@ -47,11 +90,16 @@ export class PlacesList extends Component {
 
   get preprocessData() {
     return data.map(datum => {
-      const { hours } = datum;
+      const { hours, latitude, longitude } = datum;
+
+      const { currentLocation } = this.state;
+
+      const distance = currentLocation && currentLocation.latitude && currentLocation.longitude && this.getDistance(currentLocation.latitude, currentLocation.longitude, latitude, longitude);
 
       return {
         ...datum,
-        ...this.setHoursData(hours)
+        ...this.getHoursData(hours),
+        distance
       }
     })
   }
@@ -84,6 +132,7 @@ export class PlacesList extends Component {
       ? this.sortedAndFilteredData.map((place, index) => {
         const {
           address,
+          distance,
           isOpen,
           name,
           reviews,
@@ -105,6 +154,7 @@ export class PlacesList extends Component {
                 <Text className="place-hours">{todaysHours}</Text>
                 <Text className="place-hours">{tomorrowsHours}</Text>
               </div>
+              {distance && <Text className="place-distance">{distance.toFixed(2)} miles</Text>}
             </div>
           </div>
         );
