@@ -59,8 +59,9 @@ export class FilterBar extends Component {
 
   get sortByText() {
     const { filters } = this.props;
+    const { sortBy } = filters;
 
-    switch(filters.sortBy) {
+    switch(sortBy) {
       case 'Closest To You':
         return 'The closest coffee spots in Philly';
       case 'Highest Rated':
@@ -74,8 +75,9 @@ export class FilterBar extends Component {
 
   get distanceText() {
     const { filters } = this.props;
+    const { distance } = filters;
 
-    switch(filters.distance) {
+    switch(distance) {
       case 0.5:
         return ', 4 blocks or less away from you'
       case 1.5:
@@ -89,8 +91,9 @@ export class FilterBar extends Component {
 
   get openNowText() {
     const { filters } = this.props;
+    const { isOpenNow } = filters;
 
-    return filters.openNow ? ', which are open now.' : '.';
+    return isOpenNow ? ', which are open now.' : '.';
   }
 
   get filterSummary() {
@@ -165,6 +168,7 @@ export class FilterBar extends Component {
 
   get openNowToggle() {
     const { filters } = this.props;
+    const { isOpenNow } = filters;
 
     const styles = {
       marginRight: 8
@@ -173,14 +177,14 @@ export class FilterBar extends Component {
     return (
       <div>
         <Switch
-          id="openNow"
+          id="isOpenNow"
           style={styles}
-          defaultChecked={filters.openNow}
+          defaultChecked={isOpenNow}
           onChange={() => this.actions.updateFilters({
-            openNow: !filters.openNow
+            isOpenNow: !isOpenNow
           })}
         />
-        <label htmlFor="openNow">Open Now Only</label>
+        <label htmlFor="isOpenNow">Open Now Only</label>
       </div>
     );
   }
