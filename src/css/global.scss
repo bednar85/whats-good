@@ -1,0 +1,16 @@
+body {
+  background-color: rgba(0,0,0,0.05);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  &.ant-typography {
+    margin: 0;
+  }
+}
