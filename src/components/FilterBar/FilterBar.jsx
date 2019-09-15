@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Radio } from 'antd';
+import {
+  Button,
+  Col,
+  Drawer,
+  Radio,
+  Row,
+  Switch,
+  Typography
+} from 'antd';
 
 import { actions } from '../../modules/application';
+
+const { Title } = Typography;
 
 export class FilterBar extends Component {
   constructor(props) {
@@ -12,120 +22,188 @@ export class FilterBar extends Component {
 
     this.actions = props.actions;
 
-    this.handleChange = this.handleChange.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+    this.radioGroupStyles = {
+      verticalAlign: 'top'
+    };
+  
+    this.radioStyles = {
+      display: 'block',
+      height: '30px',
+      lineHeight: '30px'
+    };
+
+    this.state = {
+      visible: false
+    };
   }
 
-  handleChange = event => {
+  showDrawer = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  onChange = event => {
     this.actions.updateFilters({
       [event.target.name]: event.target.value
     });
   }
 
-  render() {
-    const { sortBy, distance, hours } = this.props.filters;
+  get sortByText() {
+    const { filters } = this.props;
 
-    console.log(this.props.filters);
+    switch(filters.sortBy) {
+      case 'Closest To You':
+        return 'The closest coffee spots in Philly';
+      case 'Highest Rated':
+        return 'The highest rated coffee spots in Philly';
+      case 'Most Reviewed':
+        return 'The most reviewed coffee spots in Philly';
+      default:
+        return 'The best coffee spots in Philly';
+    }
+  }
 
-    const radioGroupStyles = {
-      verticalAlign: 'top'
-    };
+  get distanceText() {
+    const { filters } = this.props;
 
-    const radioStyles = {
-      display: 'block',
-      height: '30px',
-      lineHeight: '30px',
-    };
-    
+    switch(filters.distance) {
+      case 0.5:
+        return ', 4 blocks or less away from you'
+      case 1.5:
+        return', within walking distance of you'
+      case 5:
+        return', within bus/subway distance of you'
+      default:
+        return'';
+    }
+  }
+
+  get openNowText() {
+    const { filters } = this.props;
+
+    return filters.openNow ? ', which are open now.' : '.';
+  }
+
+  get filterSummary() {
+    return (
+      <Title level={4}>{this.sortByText}{this.distanceText}{this.openNowText}</Title>
+    );
+  }
+
+  get sortByGroup() {
+    const { sortBy } = this.props.filters;
+
+    return (
+      <Radio.Group
+        name="sortBy"
+        style={this.radioGroupStyles}
+        onChange={this.onChange}
+        value={sortBy}
+      >
+        <Radio
+          style={this.radioStyles}
+          value="Closest To You"
+        >
+          Closest To You
+        </Radio>
+        <Radio
+          style={this.radioStyles}
+          value="Highest Rated"
+        >
+          Highest Rated
+        </Radio>
+        <Radio
+          style={this.radioStyles}
+          value="Most Reviewed"
+        >
+          Most Reviewed
+        </Radio>
+      </Radio.Group>
+    );
+  }
+
+  get distanceGroup() {
+    const { distance } = this.props.filters;
+
+    return (  
+      <Radio.Group
+        name="distance"
+        style={this.radioGroupStyles}
+        onChange={this.onChange}
+        value={distance}
+      >
+        <Radio
+          style={this.radioStyles}
+          value={0.5}
+        >
+          Within 4 Blocks
+        </Radio>
+        <Radio
+          style={this.radioStyles}
+          value={1.5}
+        >
+          Walking (1.5 mi)
+        </Radio>
+        <Radio
+          style={this.radioStyles}
+          value={5}
+        >
+          Bus/Subway (5 mi)
+        </Radio>
+      </Radio.Group>
+    );
+  }
+
+  get openNowToggle() {
+    const { filters } = this.props;
+
+    const styles = {
+      marginRight: 8
+    }
+ 
     return (
       <div>
-        <Radio.Group
-          name="sortBy"
-          style={radioGroupStyles}
-          onChange={this.handleChange}
-          value={sortBy}
+        <Switch
+          id="openNow"
+          style={styles}
+          defaultChecked={filters.openNow}
+          onChange={() => this.actions.updateFilters({
+            openNow: !filters.openNow
+          })}
+        />
+        <label for="openNow">Open Now Only</label>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.filterSummary}
+        <Button type="primary" onClick={this.showDrawer}>
+          Show Filters
+        </Button>
+        <Drawer
+          placement="top"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
         >
-          <Radio
-            style={radioStyles}
-            disabled
-            value="Distance From You"
-          >
-            Distance From You
-          </Radio>
-          <Radio
-            style={radioStyles}
-            disabled
-            value="Distance From Selected Location"
-          >
-            Distance From Selected Location
-          </Radio>
-          <Radio
-            style={radioStyles}
-            value="Highest Rated"
-          >
-            Highest Rated
-          </Radio>
-          <Radio
-            style={radioStyles}
-            value="Most Reviewed"
-          >
-            Most Reviewed
-          </Radio>
-        </Radio.Group>
-        <Radio.Group
-          name="distance"
-          style={radioGroupStyles}
-          onChange={this.handleChange}
-          value={distance}
-        >
-          <Radio
-            style={radioStyles}
-            disabled
-            value={0.5}
-          >
-            Within 4 Blocks
-          </Radio>
-          <Radio
-            style={radioStyles}
-            disabled
-            value={1.5}
-          >
-            Walking (1.5 mi)
-          </Radio>
-          <Radio
-            style={radioStyles}
-            disabled
-            value={5}
-          >
-            Bus/Subway (5 mi)
-          </Radio>
-          <Radio
-            style={radioStyles}
-            disabled
-            value={Infinity}
-          >
-            Show All
-          </Radio>
-        </Radio.Group>
-        <Radio.Group
-          name="hours"
-          style={radioGroupStyles}
-          onChange={this.handleChange}
-          value={hours}
-        >
-          <Radio
-            style={radioStyles}
-            disabled
-            value="Open Now"
-          >
-            Open Now
-          </Radio>
-          <Radio
-            style={radioStyles}
-            value="Show All"
-          >
-            Show All
-          </Radio>
-        </Radio.Group>
+          <Row gutter={16}>
+            <Col span={9}>{this.sortByGroup}</Col>
+            <Col span={9}>{this.distanceGroup}</Col>
+            <Col span={6}>{this.openNowToggle}</Col>
+          </Row>
+        </Drawer>
       </div>
     );
   }
