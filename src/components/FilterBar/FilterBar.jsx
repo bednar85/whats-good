@@ -39,19 +39,19 @@ export class FilterBar extends Component {
     };
   }
 
-  showDrawer = () => {
+  showDrawer() {
     this.setState({
       visible: true
     });
   };
 
-  onClose = () => {
+  onClose() {
     this.setState({
       visible: false
     });
   };
 
-  onChange = event => {
+  onChange(event) {
     this.actions.updateFilters({
       [event.target.name]: event.target.value
     });
@@ -61,7 +61,7 @@ export class FilterBar extends Component {
     const { filters } = this.props;
     const { sortBy } = filters;
 
-    switch(sortBy) {
+    switch (sortBy) {
       case 'Closest To You':
         return 'The closest coffee spots in Philly';
       case 'Highest Rated':
@@ -77,15 +77,15 @@ export class FilterBar extends Component {
     const { filters } = this.props;
     const { distance } = filters;
 
-    switch(distance) {
+    switch (distance) {
       case 0.5:
         return ', 4 blocks or less away from you'
       case 1.5:
-        return', within walking distance of you'
+        return ', within walking distance of you'
       case 5:
-        return', within bus/subway distance of you'
+        return ', within bus/subway distance of you'
       default:
-        return'';
+        return '';
     }
   }
 
@@ -98,12 +98,17 @@ export class FilterBar extends Component {
 
   get filterSummary() {
     return (
-      <Title level={4}>{this.sortByText}{this.distanceText}{this.openNowText}</Title>
+      <Title level={4}>
+        {this.sortByText}
+        {this.distanceText}
+        {this.openNowText}
+      </Title>
     );
   }
 
   get sortByGroup() {
-    const { sortBy } = this.props.filters;
+    const { filters } = this.props;
+    const { sortBy } = this.props;
 
     return (
       <Radio.Group
@@ -135,7 +140,8 @@ export class FilterBar extends Component {
   }
 
   get distanceGroup() {
-    const { distance } = this.props.filters;
+    const { filters } = this.props;
+    const { distance } = this.props;
 
     return (  
       <Radio.Group
@@ -219,7 +225,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    Object.assign({}, actions),
+    { ...actions },
     dispatch
   )
 });
