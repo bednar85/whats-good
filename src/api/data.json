@@ -5,6 +5,8 @@
     "reviews": 463,
     "categories": ["Coffee & Tea"],
     "address": "1335 Frankford Ave",
+    "latitude": 39.971150,
+    "longitude": -75.134170,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -78,6 +80,8 @@
     "reviews": 123,
     "categories": ["Coffee & Tea", "Sandwiches"],
     "address": "1619 Frankford Ave",
+    "latitude": 39.974460,
+    "longitude": -75.132950,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -151,6 +155,8 @@
     "reviews": 98,
     "categories": ["Coffee & Tea"],
     "address": "1523 E Susquehanna Ave",
+    "latitude": 39.976470,
+    "longitude": -75.126940,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -229,6 +235,8 @@
     "reviews": 19,
     "categories": ["Cafes", "Coffee & Tea", "Gelato"],
     "address": "2413 Frankford Ave",
+    "latitude": 39.981820,
+    "longitude": -75.126980,
     "neighborhood": "Kensington",
     "hours": {
       "Mon": {
@@ -296,6 +304,8 @@
     "reviews": 214,
     "categories": ["Coffee & Tea", "Breakfast & Brunch", "Vinyl Records"],
     "address": "400 E Girard Ave",
+    "latitude": 39.970010,
+    "longitude": -75.130230,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -369,6 +379,8 @@
     "reviews": 26,
     "categories": ["Cafes"],
     "address": "100 W Oxford St",
+    "latitude": 39.973780,
+    "longitude": -75.135220,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -436,6 +448,8 @@
     "reviews": 200,
     "categories": ["Bakeries", "Desserts", "Cafes"],
     "address": "1306 Frankford Ave",
+    "latitude": 39.970470,
+    "longitude": -75.134650,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -503,6 +517,8 @@
     "reviews": 550,
     "categories": ["Bars", "American (New)", "Breakfast & Brunch"],
     "address": "1253 N Front St",
+    "latitude": 39.970273,
+    "longitude": -75.135721,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
@@ -576,6 +592,8 @@
     "reviews": 8,
     "categories": ["Donuts", "Coffee & Tea", "Breakfast & Brunch"],
     "address": "2557 Amber St",
+    "latitude": 39.984450,
+    "longitude": -75.124460,
     "neighborhood": "Kensington",
     "hours": {
       "Mon": {
@@ -649,6 +667,8 @@
     "reviews": 153,
     "categories": ["Bagels"],
     "address": "1451 E Columbia Ave",
+    "latitude": 39.974410,
+    "longitude": -75.132620,
     "neighborhood": "Fishtown",
     "hours": {
       "Mon": {
