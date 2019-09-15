@@ -1,25 +1,21 @@
 import moment from 'moment';
 
-export const getDistance = (lat1, lng1, lat2, lng2) => {
-  // Convert Degress to Radians
-  function Deg2Rad(deg) {
-    return deg * Math.PI / 180;
-  }
+// Convert Degress to Radians
+const degreesToRadians = (deg) => {
+  return deg * Math.PI / 180;
+}
 
-  function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
-    lat1 = Deg2Rad(lat1);
-    lat2 = Deg2Rad(lat2);
-    lon1 = Deg2Rad(lon1);
-    lon2 = Deg2Rad(lon2);
-    // var R = 6371; // km
-    var R = 3959; // miles
-    var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-    var y = (lat2 - lat1);
-    var d = Math.sqrt(x * x + y * y) * R;
-    return d;
-  }
+export const getDistance = (lat1, lon1, lat2, lon2) => {
+  lat1 = degreesToRadians(lat1);
+  lat2 = degreesToRadians(lat2);
+  lon1 = degreesToRadians(lon1);
+  lon2 = degreesToRadians(lon2);
+  // var R = 6371; // radius of the earth in kilometers
+  var R = 3959; // radius of the earth in miles
+  var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+  var y = (lat2 - lat1);
 
-  return PythagorasEquirectangular(lat1, lng1, lat2, lng2);
+  return Math.sqrt(x * x + y * y) * R;
 }
 
 export const getHours = (hours) => {
