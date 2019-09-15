@@ -1,0 +1,61 @@
+.wg-places-list {
+  padding: 20px;
+}
+
+.wg-place {
+  background-color: #fff;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 20px;
+
+  &--is-closed {
+    opacity: .5;
+
+    .ant-typography,
+    h4.ant-typography {
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .ant-rate {
+      color: rgba(0, 0, 0, 0.33);
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+  }
+
+  &-name {
+    font-size: 20px;
+  }
+
+  &-stars,
+  &-reviews,
+  &-hours {
+    display: block;
+  }
+
+  &-reviews {
+    margin-bottom: 10px;
+  }
+
+  &-hours--today {
+    font-weight: 600;
+  }
+
+  &-location-details {
+    text-align: right;
+  }
+
+  &-address,
+  &-distance {
+    display: block;
+  }
+
+  &-distance {
+    font-style: italic;
+  }
+}
+

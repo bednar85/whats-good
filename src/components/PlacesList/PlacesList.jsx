@@ -12,6 +12,9 @@ export class PlacesList extends Component {
   constructor(props) {
     super(props);
 
+    this.placesListClass = 'wg-places-list'
+    this.placeClass = 'wg-place';
+
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
 
     this.state = {
@@ -98,20 +101,31 @@ export class PlacesList extends Component {
           tomorrowsHours
         } = place;
 
-        const closedClass = !isOpen && 'place--is-closed';
+        const closedClass = !isOpen && `${this.placeClass}--is-closed`;
 
         return (
-          <div className={`place ${closedClass}`} key={index}>
-            <div className="place-content">
-              <Title className="place-name" level={4}>{name}</Title>
-              <Rate disabled allowHalf defaultValue={stars} />
-              <Text className="place-reviews">{reviews} Reviews</Text>
-              <Text className="place-address">{address}</Text>
-              <div className="place-hours">
-                <Text className="place-hours">{todaysHours}</Text>
-                <Text className="place-hours">{tomorrowsHours}</Text>
+          <div className={`${this.placeClass} ${closedClass}`} key={index}>
+            <div className={`${this.placeClass}-content`}>
+              <div className={`${this.placeClass}-main-content`}>
+                <Title className={`${this.placeClass}-name`} level={4}>{name}</Title>
+                <Rate
+                  className={`${this.placeClass}-stars`}
+                  disabled
+                  allowHalf
+                  defaultValue={stars}
+                />
+                <Text className={`${this.placeClass}-reviews`}>{reviews} Reviews</Text>
+                <div className={`${this.placeClass}-hours-of-operation`}>
+                  <Text className={`${this.placeClass}-hours ${this.placeClass}-hours--today`}>{todaysHours}</Text>
+                  <Text className={`${this.placeClass}-hours`}>{tomorrowsHours}</Text>
+                </div>
               </div>
-              {distance && <Text className="place-distance">{distance.toFixed(2)} miles</Text>}
+              <div className={`${this.placeClass}-secondary-content`}>
+                <div className={`${this.placeClass}-location-details`}>
+                  <Text className={`${this.placeClass}-address`}>{address}</Text>
+                  {distance && <Text className={`${this.placeClass}-distance`}>{distance.toFixed(2)} miles away from you</Text>}
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -121,7 +135,7 @@ export class PlacesList extends Component {
 
   render() {
     return (
-      <div className="places-list">{this.places}</div>
+      <div className={this.placesListClass}>{this.places}</div>
     );
   }
 }
