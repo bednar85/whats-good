@@ -48,10 +48,16 @@ export class PlacesList extends Component {
 
       const { currentLocation } = this.state;
 
-      const distance = currentLocation
-        && currentLocation.latitude
-        && currentLocation.longitude
-        && getDistance(currentLocation.latitude, currentLocation.longitude, latitude, longitude);
+      const distance =
+        currentLocation &&
+        currentLocation.latitude &&
+        currentLocation.longitude &&
+        getDistance(
+          currentLocation.latitude,
+          currentLocation.longitude,
+          latitude,
+          longitude
+        );
 
       return {
         ...datum,
@@ -94,8 +100,8 @@ export class PlacesList extends Component {
   }
 
   get places() {
-    return this.sortedAndFilteredData.length
-      ? this.sortedAndFilteredData.map((place, index) => {
+    return this.sortedAndFilteredData.length ? (
+      this.sortedAndFilteredData.map((place, index) => {
         const {
           address,
           distance,
@@ -113,7 +119,9 @@ export class PlacesList extends Component {
           <div className={`${this.placeClass} ${closedClass}`} key={index}>
             <div className={`${this.placeClass}-content`}>
               <div className={`${this.placeClass}-main-content`}>
-                <Title className={`${this.placeClass}-name`} level={4}>{name}</Title>
+                <Title className={`${this.placeClass}-name`} level={4}>
+                  {name}
+                </Title>
                 <Rate
                   className={`${this.placeClass}-stars`}
                   disabled
@@ -121,23 +129,28 @@ export class PlacesList extends Component {
                   defaultValue={stars}
                 />
                 <Text className={`${this.placeClass}-reviews`}>
-                  {reviews}
-                  Reviews
+                  {reviews} Reviews
                 </Text>
                 <div className={`${this.placeClass}-hours-of-operation`}>
-                  <Text className={`${this.placeClass}-hours ${this.placeClass}-hours--today`}>{todaysHours}</Text>
-                  <Text className={`${this.placeClass}-hours`}>{tomorrowsHours}</Text>
+                  <Text
+                    className={`${this.placeClass}-hours ${this.placeClass}-hours--today`}
+                  >
+                    {todaysHours}
+                  </Text>
+                  <Text className={`${this.placeClass}-hours`}>
+                    {tomorrowsHours}
+                  </Text>
                 </div>
               </div>
               <div className={`${this.placeClass}-secondary-content`}>
                 <div className={`${this.placeClass}-location-details`}>
-                  <Text className={`${this.placeClass}-address`}>{address}</Text>
+                  <Text className={`${this.placeClass}-address`}>
+                    {address}
+                  </Text>
                   <Text className={`${this.placeClass}-distance`}>
-                    {
-                      distance
-                        ? `${distance.toFixed(2)} miles away from you`
-                        : 'calculating distance...'
-                    }
+                    {distance
+                      ? `${distance.toFixed(2)} miles away from you`
+                      : 'calculating distance...'}
                   </Text>
                 </div>
               </div>
@@ -145,13 +158,16 @@ export class PlacesList extends Component {
           </div>
         );
       })
-      : <div>Sorry, there are no locations that match the filters you&apos;ve selected.</div>;
+    ) : (
+      <div>
+        Sorry, there are no locations that match the filters you&apos;ve
+        selected.
+      </div>
+    );
   }
 
   render() {
-    return (
-      <div className={this.placesListClass}>{this.places}</div>
-    );
+    return <div className={this.placesListClass}>{this.places}</div>;
   }
 }
 
