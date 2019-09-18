@@ -172,7 +172,7 @@ export class PlacesList extends Component {
 }
 
 const mapStateToProps = state => ({
-  filters: state.filters
+  filters: state.data.filters
 });
 
 export default connect(mapStateToProps)(PlacesList);

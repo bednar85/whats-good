@@ -13,15 +13,19 @@ export const actions = {
 
 // Initial State
 const initialState = {
-  filters: {
-    sortBy: 'Highest Rated',
-    distance: 1.5,
-    isOpenNow: false
-  }
+  loaded: {},
+  data: {
+    filters: {
+      sortBy: 'Highest Rated',
+      distance: 1.5,
+      isOpenNow: false
+    }
+  },
+  errors: {}
 };
 
-// Reducer
-const rootReducer = (state = initialState, action) => {
+// Reducers
+const dataReducer = (state, action) => {
   switch (action.type) {
     case FILTERS_UPDATE:
       return {
@@ -30,6 +34,18 @@ const rootReducer = (state = initialState, action) => {
           ...state.filters,
           ...action.payload
         }
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FILTERS_UPDATE:
+      return {
+        ...state,
+        data: dataReducer(state.data, action)
       };
     default:
       return state;

@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {
-  Button,
-  Col,
-  Drawer,
-  Radio,
-  Row,
-  Switch,
-  Typography
-} from 'antd';
+import { Button, Col, Drawer, Radio, Row, Switch, Typography } from 'antd';
 
 import { actions } from '../../modules/application';
 
@@ -113,22 +105,13 @@ export class FilterBar extends Component {
         onChange={this.onFilterChange}
         value={sortBy}
       >
-        <Radio
-          style={this.radioStyles}
-          value="Closest To You"
-        >
+        <Radio style={this.radioStyles} value="Closest To You">
           Closest To You
         </Radio>
-        <Radio
-          style={this.radioStyles}
-          value="Highest Rated"
-        >
+        <Radio style={this.radioStyles} value="Highest Rated">
           Highest Rated
         </Radio>
-        <Radio
-          style={this.radioStyles}
-          value="Most Reviewed"
-        >
+        <Radio style={this.radioStyles} value="Most Reviewed">
           Most Reviewed
         </Radio>
       </Radio.Group>
@@ -146,22 +129,13 @@ export class FilterBar extends Component {
         onChange={this.onFilterChange}
         value={distance}
       >
-        <Radio
-          style={this.radioStyles}
-          value={0.5}
-        >
+        <Radio style={this.radioStyles} value={0.5}>
           Within 4 Blocks (0.5 mi)
         </Radio>
-        <Radio
-          style={this.radioStyles}
-          value={1.5}
-        >
+        <Radio style={this.radioStyles} value={1.5}>
           Walking (1.5 mi)
         </Radio>
-        <Radio
-          style={this.radioStyles}
-          value={5}
-        >
+        <Radio style={this.radioStyles} value={5}>
           Bus/Subway (5 mi)
         </Radio>
       </Radio.Group>
@@ -182,9 +156,11 @@ export class FilterBar extends Component {
           id="isOpenNow"
           style={styles}
           defaultChecked={isOpenNow}
-          onChange={() => this.actions.updateFilters({
-            isOpenNow: !isOpenNow
-          })}
+          onChange={() =>
+            this.actions.updateFilters({
+              isOpenNow: !isOpenNow
+            })
+          }
         />
         <label htmlFor="isOpenNow">Open Now Only</label>
       </div>
@@ -209,9 +185,7 @@ export class FilterBar extends Component {
     return (
       <div>
         {this.filterSummary}
-        <Button onClick={this.showDrawer}>
-          Show Filters
-        </Button>
+        <Button onClick={this.showDrawer}>Show Filters</Button>
         <Drawer
           closable={false}
           height="auto"
@@ -231,14 +205,14 @@ export class FilterBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  filters: state.filters
+  filters: state.data.filters
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    { ...actions },
-    dispatch
-  )
+  actions: bindActionCreators({ ...actions }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterBar);
