@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
 
+import { actions } from '../../modules/application';
 import data from '../../api/data';
 import { getDistance, getHours } from '../../utils';
 
@@ -11,11 +13,15 @@ const { Text, Title } = Typography;
 
 export class PlacesList extends Component {
   static propTypes = {
-    filters: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired,
+    loaded: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
+
+    this.actions = props.actions;
 
     this.placesListClass = 'wg-places-list';
     this.placeClass = 'wg-place';
@@ -27,8 +33,16 @@ export class PlacesList extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
+  // }
+
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
+    const { loaded } = this.props;
+
+    if (!loaded.places) {
+      this.actions.loadData('places');
+    }
   }
 
   getCurrentLocation(position) {
@@ -172,7 +186,15 @@ export class PlacesList extends Component {
 }
 
 const mapStateToProps = state => ({
+  loaded: state.loaded,
   filters: state.data.filters
 });
 
-export default connect(mapStateToProps)(PlacesList);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ ...actions }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlacesList);
