@@ -33,12 +33,10 @@ export class PlacesList extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
-  // }
-
   componentDidMount() {
     const { loaded } = this.props;
+
+    navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
 
     if (!loaded.places) {
       this.actions.loadData('places');
