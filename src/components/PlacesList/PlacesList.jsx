@@ -7,15 +7,15 @@ import { Rate, Typography } from 'antd';
 
 import { actions } from '../../modules/application';
 import data from '../../api/data';
-import { getDistance, getHours } from '../../utils';
+// import { getDistance, getHours } from '../../utils';
 
 const { Text, Title } = Typography;
 
 export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired,
-    loaded: PropTypes.object.isRequired
+    filters: PropTypes.object.isRequired
+    // loaded: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -26,64 +26,56 @@ export class PlacesList extends Component {
     this.placesListClass = 'wg-places-list';
     this.placeClass = 'wg-place';
 
-    this.getCurrentLocation = this.getCurrentLocation.bind(this);
+    // this.getData = this.getData.bind(this);
 
-    this.state = {
-      currentLocation: null
-    };
+    // this.state = {
+    //   currentLocation: null
+    // };
   }
 
   componentDidMount() {
-    const { loaded } = this.props;
+    console.log('componentDidMount');
 
-    navigator.geolocation.getCurrentPosition(this.getCurrentLocation);
-
-    if (!loaded.places) {
-      this.actions.loadData('places');
-    }
+    navigator.geolocation.getCurrentPosition(position =>
+      this.actions.loadData('places', position.coords)
+    );
   }
 
-  getCurrentLocation(position) {
-    const { latitude, longitude } = position.coords;
+  // getData(position) {
+  //   this.actions.loadData('places', position.coords);
+  // }
 
-    this.setState({
-      currentLocation: {
-        latitude,
-        longitude
-      }
-    });
-  }
+  // get preprocessData() {
+  //   return data.map(datum => {
+  //     const { hours, latitude, longitude } = datum;
 
-  get preprocessData() {
-    return data.map(datum => {
-      const { hours, latitude, longitude } = datum;
+  //     const { currentLocation } = this.state;
 
-      const { currentLocation } = this.state;
+  //     const distance =
+  //       currentLocation &&
+  //       currentLocation.latitude &&
+  //       currentLocation.longitude &&
+  //       getDistance(
+  //         currentLocation.latitude,
+  //         currentLocation.longitude,
+  //         latitude,
+  //         longitude
+  //       );
 
-      const distance =
-        currentLocation &&
-        currentLocation.latitude &&
-        currentLocation.longitude &&
-        getDistance(
-          currentLocation.latitude,
-          currentLocation.longitude,
-          latitude,
-          longitude
-        );
-
-      return {
-        ...datum,
-        ...getHours(hours),
-        distance
-      };
-    });
-  }
+  //     return {
+  //       ...datum,
+  //       ...getHours(hours),
+  //       distance
+  //     };
+  //   });
+  // }
 
   get sortedAndFilteredData() {
     const { filters } = this.props;
-    const { distance, isOpenNow, sortBy } = filters;
+    // const { distance, isOpenNow, sortBy } = filters;
+    const { sortBy } = filters;
 
-    const initialData = this.preprocessData;
+    // const initialData = data;
 
     let sortKey = '';
 
@@ -101,14 +93,14 @@ export class PlacesList extends Component {
         sortKey = 'stars';
     }
 
-    const filteredData = isOpenNow
-      ? initialData.filter(d => d.distance <= distance && d.isOpen === true)
-      : initialData.filter(d => d.distance <= distance);
+    // const filteredData = isOpenNow
+    //   ? initialData.filter(d => d.distance <= distance && d.isOpen === true)
+    //   : initialData.filter(d => d.distance <= distance);
 
     // sort ascending (0-100) if the sortKey is distance
     return sortKey === 'distance'
-      ? filteredData.sort((a, b) => a[sortKey] - b[sortKey])
-      : filteredData.sort((a, b) => b[sortKey] - a[sortKey]);
+      ? data.sort((a, b) => a[sortKey] - b[sortKey])
+      : data.sort((a, b) => b[sortKey] - a[sortKey]);
   }
 
   get places() {
@@ -184,7 +176,7 @@ export class PlacesList extends Component {
 }
 
 const mapStateToProps = state => ({
-  loaded: state.loaded,
+  // loaded: state.loaded,
   filters: state.data.filters
 });
 
