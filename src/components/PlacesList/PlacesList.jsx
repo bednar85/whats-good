@@ -30,6 +30,8 @@ export class PlacesList extends Component {
   }
 
   componentDidMount() {
+    // get the current location with the browser's Geolocation API
+    // then load data from Yelp
     navigator.geolocation.getCurrentPosition(position =>
       this.actions.loadData('places', position.coords)
     );
