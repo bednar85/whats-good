@@ -20,9 +20,9 @@ export class FilterBar extends Component {
 
     this.actions = props.actions;
 
-    this.hideDrawer = this.hideDrawer.bind(this);
+    this.hideFilterDrawer = this.hideFilterDrawer.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
-    this.showDrawer = this.showDrawer.bind(this);
+    this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
     this.radioGroupStyles = {
       verticalAlign: 'top'
@@ -167,13 +167,13 @@ export class FilterBar extends Component {
     );
   }
 
-  showDrawer() {
+  showFilterDrawer() {
     this.setState({
       visible: true
     });
   }
 
-  hideDrawer() {
+  hideFilterDrawer() {
     this.setState({
       visible: false
     });
@@ -185,11 +185,11 @@ export class FilterBar extends Component {
     return (
       <div>
         {this.filterSummary}
-        <Button onClick={this.showDrawer}>Show Filters</Button>
+        <Button onClick={this.showFilterDrawer}>Show Filters</Button>
         <Drawer
           closable={false}
           height="auto"
-          onClose={this.hideDrawer}
+          onClose={this.hideFilterDrawer}
           placement="top"
           visible={visible}
         >
