@@ -3,6 +3,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { actions, types } from '.';
+import { metersToMiles } from '../../utils';
 
 function getYelpData(location) {
   return axios.get(
@@ -25,7 +26,13 @@ function* loadDataWorker(action) {
 
   try {
     const response = yield call(getYelpData, location);
-    yield put(actions.loadDataSuccess('places', response.data.businesses));
+
+    const processedData = response.data.businesses.map(datum => ({
+      ...datum,
+      distance: metersToMiles(datum.distance)
+    }));
+
+    yield put(actions.loadDataSuccess('places', processedData));
   } catch (error) {
     yield put(actions.showError('places', error));
   }
