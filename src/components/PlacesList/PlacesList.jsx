@@ -42,14 +42,16 @@ export class PlacesList extends Component {
         sortKey = 'distance';
         break;
       case 'Highest Rated':
-        sortKey = 'stars';
+        sortKey = 'rating';
         break;
       case 'Most Reviewed':
         sortKey = 'reviews';
         break;
       default:
-        sortKey = 'stars';
+        sortKey = 'rating';
     }
+
+    console.log(places);
 
     const filteredData = isOpenNow
       ? places.filter(d => d.distance <= maxDistance && !d.is_closed)
@@ -69,8 +71,8 @@ export class PlacesList extends Component {
           distance,
           isOpen,
           name,
-          reviews,
-          stars,
+          review_count,
+          rating,
           todaysHours,
           tomorrowsHours
         } = place;
@@ -88,10 +90,10 @@ export class PlacesList extends Component {
                   className={`${this.placeClass}-stars`}
                   disabled
                   allowHalf
-                  defaultValue={stars}
+                  defaultValue={rating}
                 />
                 <Text className={`${this.placeClass}-reviews`}>
-                  {reviews} Reviews
+                  {review_count} Reviews
                 </Text>
                 <div className={`${this.placeClass}-hours-of-operation`}>
                   <Text
