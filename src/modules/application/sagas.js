@@ -4,54 +4,30 @@ import axios from 'axios';
 
 import { actions, types } from '.';
 
-function getData(payload) {
-  console.log('getData');
-  console.log('  payload:', payload);
-
-  const { latitude, longitude } = payload;
-
-  axios
-    .get(
-      `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-        },
-        params: {
-          categories: 'breakfast_brunch',
-          latitude,
-          longitude
-        }
+function getYelpData(location) {
+  return axios.get(
+    `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
+      },
+      params: {
+        categories: 'coffee',
+        ...location
       }
-    )
-    .then(res => {
-      console.log(res.data.businesses);
-      // this.setState({ results: res.data.businesses, loading: false });
-    })
-    .catch(error => {
-      console.log(error);
-      // this.setState({
-      //   errorState: `Sorry we coudln't find information related to the location you search, do you want to try something else?`,
-      //   loading: false
-      // });
-    });
-
-    return fetch('https://jsonplaceholder.typicode.com/posts').then(response =>
-    response.json()
+    }
   );
 }
 
 function* loadDataWorker(action) {
-  console.log('loadDataWorker');
-  console.log('  action:', action);
-
-  
+  const { latitude, longitude } = action.payload;
+  const location = { latitude, longitude };
 
   try {
-    const payload = yield call(getData, action.payload);
-    yield put(actions.loadDataSuccess('mockUsers', payload));
+    const response = yield call(getYelpData, location);
+    yield put(actions.loadDataSuccess('places', response.data.businesses));
   } catch (error) {
-    yield put(actions.showError('mockUsers', error));
+    yield put(actions.showError('places', error));
   }
 }
 
