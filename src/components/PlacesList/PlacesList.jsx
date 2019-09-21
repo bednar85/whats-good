@@ -65,21 +65,15 @@ export class PlacesList extends Component {
 
   get places() {
     return this.sortedAndFilteredData.length ? (
-      this.sortedAndFilteredData.map((place, index) => {
-        const {
-          distance,
-          id,
-          isOpen,
-          location,
-          name,
-          rating,
-          review_count
-        } = place;
+      this.sortedAndFilteredData.map(place => {
+        const { distance, id, location, name, rating, review_count } = place;
 
-        const closedClass = !isOpen && `${this.placeClass}--is-closed`;
+        // is_closed is referring to if the location is permanetly closed not it's hours of operation
+        // if I want to do that I'll need to make other adjustments
+        // const closedClass = is_closed && `${this.placeClass}--is-closed`;
 
         return (
-          <div className={`${this.placeClass} ${closedClass}`} key={id}>
+          <div className={this.placeClass} key={id}>
             <div className={`${this.placeClass}-content`}>
               <div className={`${this.placeClass}-main-content`}>
                 <Title className={`${this.placeClass}-name`} level={4}>
