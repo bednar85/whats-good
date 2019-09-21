@@ -73,8 +73,6 @@ export class PlacesList extends Component {
           name,
           review_count,
           rating,
-          todaysHours,
-          tomorrowsHours
         } = place;
 
         const closedClass = !isOpen && `${this.placeClass}--is-closed`;
@@ -95,16 +93,6 @@ export class PlacesList extends Component {
                 <Text className={`${this.placeClass}-reviews`}>
                   {review_count} Reviews
                 </Text>
-                <div className={`${this.placeClass}-hours-of-operation`}>
-                  <Text
-                    className={`${this.placeClass}-hours ${this.placeClass}-hours--today`}
-                  >
-                    {todaysHours}
-                  </Text>
-                  <Text className={`${this.placeClass}-hours`}>
-                    {tomorrowsHours}
-                  </Text>
-                </div>
               </div>
               <div className={`${this.placeClass}-secondary-content`}>
                 <div className={`${this.placeClass}-location-details`}>
