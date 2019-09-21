@@ -12,7 +12,8 @@ const { Title } = Typography;
 export class FilterBar extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired
+    filters: PropTypes.object.isRequired,
+    places: PropTypes.array
   };
 
   constructor(props) {
@@ -181,7 +182,11 @@ export class FilterBar extends Component {
   }
 
   loadHoursData() {
-    console.log('loadHoursData');
+    const { places } = this.props;
+
+    const businessIds = places.map(datum => datum.id);
+
+    this.actions.loadData('hours', businessIds);
   }
 
   render() {
@@ -211,7 +216,8 @@ export class FilterBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  filters: state.data.filters
+  filters: state.data.filters,
+  places: state.data.places
 });
 
 const mapDispatchToProps = dispatch => ({
