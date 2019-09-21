@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
 
+import { Loader } from '../Loader/Loader';
+
 import { actions } from '../../modules/application';
 
 const { Text, Title } = Typography;
@@ -13,6 +15,7 @@ export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
+    loaded: PropTypes.bool.isRequired,
     places: PropTypes.array.isRequired
   };
 
@@ -50,8 +53,6 @@ export class PlacesList extends Component {
       default:
         sortKey = 'rating';
     }
-
-    console.log(places);
 
     const filteredData = isOpenNow
       ? places.filter(d => d.distance <= maxDistance && !d.is_closed)
@@ -114,12 +115,19 @@ export class PlacesList extends Component {
   }
 
   render() {
-    return <div className={this.placesListClass}>{this.places}</div>;
+    const { loaded } = this.props;
+
+    return (
+      <div className={this.placesListClass}>
+        <Loader loaded={loaded} render={() => this.places} />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
   filters: state.data.filters,
+  loaded: state.loaded.places,
   places: state.data.places
 });
 
