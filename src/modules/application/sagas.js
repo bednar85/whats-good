@@ -20,9 +20,14 @@ function yelpBusinessSearch(location) {
   );
 }
 
-// function yelpBusinessDetails(ids) {
-//   console.log('businessIds:', businessIds);
-// }
+/**
+ * I'm not able to get hours data on all of the results at once
+ * I tried with an axios.all and got this error
+ * Request failed with status code 429 (Too Many Requests)
+ * I'll need to either do this call on a detail page
+ * or integrate GraphQL to handle making requests that way
+ */
+// function yelpBusinessDetails(ids) {}
 
 function* loadPlacesData(action) {
   const { latitude, longitude } = action.payload;
@@ -42,20 +47,16 @@ function* loadPlacesData(action) {
   }
 }
 
-function* loadHoursData(action) {
-  console.log('loadHoursData was called');
-  console.log('  action:', action);
-}
+// function* loadHoursData(action) {
+//   yield* yelpBusinessDetails(action.payload);
+// }
 
-// in this loadData worker we'll split the logic based on the key
+/**
+ * if I need to handle loading data in different ways
+ * split the logic here based on the key in action
+ */
 function* loadDataWorker(action) {
-  const { key } = action.meta;
-
-  if (key === 'places') {
-    yield* loadPlacesData(action);
-  } else if (key === 'hours') {
-    yield* loadHoursData(action);
-  }
+  yield* loadPlacesData(action);
 }
 
 export default function* rootSaga() {
