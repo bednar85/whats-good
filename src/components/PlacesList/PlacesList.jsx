@@ -14,6 +14,7 @@ const { Text, Title } = Typography;
 export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     loaded: PropTypes.bool.isRequired,
     places: PropTypes.array.isRequired
@@ -115,17 +116,18 @@ export class PlacesList extends Component {
   }
 
   render() {
-    const { loaded } = this.props;
+    const { loaded, error } = this.props;
 
     return (
       <div className={this.placesListClass}>
-        <Loader loaded={loaded} render={() => this.places} />
+        <Loader loaded={loaded} error={error} render={() => this.places} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  error: state.errors.places,
   filters: state.data.filters,
   loaded: state.loaded.places,
   places: state.data.places

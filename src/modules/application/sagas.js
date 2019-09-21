@@ -34,7 +34,7 @@ function* loadDataWorker(action) {
 
     yield put(actions.loadDataSuccess('places', processedData));
   } catch (error) {
-    yield put(actions.showError('places', error));
+    yield put(actions.showError('places', error.message));
   }
 }
 

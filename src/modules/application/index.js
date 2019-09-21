@@ -39,11 +39,6 @@ const loadDataSuccess = (key, data) => ({
 
 const showError = (key, message = '') => ({
   type: ERROR_SHOW,
-  meta: {
-    loaded: {
-      [key]: true
-    }
-  },
   payload: {
     [key]: {
       show: true,
@@ -56,8 +51,7 @@ const hideError = key => ({
   type: ERROR_HIDE,
   payload: {
     [key]: {
-      show: false,
-      message: ''
+      show: false
     }
   }
 });
@@ -90,8 +84,7 @@ const initialState = {
   },
   errors: {
     places: {
-      show: false,
-      message: ''
+      show: false
     }
   }
 };
@@ -131,11 +124,6 @@ const rootReducer = (state = initialState, action) => {
         data: dataReducer(state.data, action)
       };
     case ERROR_SHOW:
-      return {
-        ...state,
-        loaded: { ...state.loaded, ...action.meta.loaded },
-        errors: { ...state.errors, ...action.payload }
-      };
     case ERROR_HIDE:
       return {
         ...state,
