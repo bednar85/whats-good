@@ -21,6 +21,7 @@ export class FilterBar extends Component {
     this.actions = props.actions;
 
     this.hideFilterDrawer = this.hideFilterDrawer.bind(this);
+    this.loadHoursData = this.loadHoursData.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
@@ -179,6 +180,10 @@ export class FilterBar extends Component {
     });
   }
 
+  loadHoursData() {
+    console.log('loadHoursData');
+  }
+
   render() {
     const { visible } = this.state;
 
@@ -186,6 +191,7 @@ export class FilterBar extends Component {
       <div>
         {this.filterSummary}
         <Button onClick={this.showFilterDrawer}>Show Filters</Button>
+        <Button onClick={this.loadHoursData}>Load Hours Data</Button>
         <Drawer
           closable={false}
           height="auto"
