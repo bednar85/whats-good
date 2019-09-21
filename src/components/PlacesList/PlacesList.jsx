@@ -6,16 +6,14 @@ import { connect } from 'react-redux';
 import { Rate, Typography } from 'antd';
 
 import { actions } from '../../modules/application';
-import data from '../../api/data';
-// import { getDistance, getHours } from '../../utils';
 
 const { Text, Title } = Typography;
 
 export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired
-    // loaded: PropTypes.object.isRequired
+    filters: PropTypes.object.isRequired,
+    places: PropTypes.array.isRequired
   };
 
   constructor(props) {
@@ -25,57 +23,17 @@ export class PlacesList extends Component {
 
     this.placesListClass = 'wg-places-list';
     this.placeClass = 'wg-place';
-
-    // this.getData = this.getData.bind(this);
-
-    // this.state = {
-    //   currentLocation: null
-    // };
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-
     navigator.geolocation.getCurrentPosition(position =>
       this.actions.loadData('places', position.coords)
     );
   }
 
-  // getData(position) {
-  //   this.actions.loadData('places', position.coords);
-  // }
-
-  // get preprocessData() {
-  //   return data.map(datum => {
-  //     const { hours, latitude, longitude } = datum;
-
-  //     const { currentLocation } = this.state;
-
-  //     const distance =
-  //       currentLocation &&
-  //       currentLocation.latitude &&
-  //       currentLocation.longitude &&
-  //       getDistance(
-  //         currentLocation.latitude,
-  //         currentLocation.longitude,
-  //         latitude,
-  //         longitude
-  //       );
-
-  //     return {
-  //       ...datum,
-  //       ...getHours(hours),
-  //       distance
-  //     };
-  //   });
-  // }
-
   get sortedAndFilteredData() {
-    const { filters } = this.props;
-    // const { distance, isOpenNow, sortBy } = filters;
-    const { sortBy } = filters;
-
-    // const initialData = data;
+    const { filters, places } = this.props;
+    const { maxDistance, isOpenNow, sortBy } = filters;
 
     let sortKey = '';
 
@@ -93,14 +51,14 @@ export class PlacesList extends Component {
         sortKey = 'stars';
     }
 
-    // const filteredData = isOpenNow
-    //   ? initialData.filter(d => d.distance <= distance && d.isOpen === true)
-    //   : initialData.filter(d => d.distance <= distance);
+    const filteredData = isOpenNow
+      ? places.filter(d => d.distance <= maxDistance && !d.is_closed)
+      : places.filter(d => d.distance <= maxDistance);
 
     // sort ascending (0-100) if the sortKey is distance
     return sortKey === 'distance'
-      ? data.sort((a, b) => a[sortKey] - b[sortKey])
-      : data.sort((a, b) => b[sortKey] - a[sortKey]);
+      ? filteredData.sort((a, b) => a[sortKey] - b[sortKey])
+      : filteredData.sort((a, b) => b[sortKey] - a[sortKey]);
   }
 
   get places() {
@@ -176,8 +134,8 @@ export class PlacesList extends Component {
 }
 
 const mapStateToProps = state => ({
-  // loaded: state.loaded,
-  filters: state.data.filters
+  filters: state.data.filters,
+  places: state.data.places
 });
 
 const mapDispatchToProps = dispatch => ({

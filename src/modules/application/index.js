@@ -83,7 +83,7 @@ const initialState = {
   data: {
     filters: {
       sortBy: 'Highest Rated',
-      distance: 1.5,
+      maxDistance: 1.5,
       isOpenNow: false
     },
     places: []

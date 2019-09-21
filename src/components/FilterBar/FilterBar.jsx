@@ -63,9 +63,9 @@ export class FilterBar extends Component {
 
   get distanceText() {
     const { filters } = this.props;
-    const { distance } = filters;
+    const { maxDistance } = filters;
 
-    switch (distance) {
+    switch (maxDistance) {
       case 0.5:
         return ', 4 blocks or less away from you';
       case 1.5:
@@ -120,14 +120,14 @@ export class FilterBar extends Component {
 
   get distanceGroup() {
     const { filters } = this.props;
-    const { distance } = filters;
+    const { maxDistance } = filters;
 
     return (
       <Radio.Group
-        name="distance"
+        name="maxDistance"
         style={this.radioGroupStyles}
         onChange={this.onFilterChange}
-        value={distance}
+        value={maxDistance}
       >
         <Radio style={this.radioStyles} value={0.5}>
           Within 4 Blocks (0.5 mi)
