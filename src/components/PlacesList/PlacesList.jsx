@@ -67,12 +67,12 @@ export class PlacesList extends Component {
     return this.sortedAndFilteredData.length ? (
       this.sortedAndFilteredData.map((place, index) => {
         const {
-          address,
           distance,
           isOpen,
+          location,
           name,
-          review_count,
           rating,
+          review_count
         } = place;
 
         const closedClass = !isOpen && `${this.placeClass}--is-closed`;
@@ -97,7 +97,7 @@ export class PlacesList extends Component {
               <div className={`${this.placeClass}-secondary-content`}>
                 <div className={`${this.placeClass}-location-details`}>
                   <Text className={`${this.placeClass}-address`}>
-                    {address}
+                    {location.address1}
                   </Text>
                   <Text className={`${this.placeClass}-distance`}>
                     {distance
