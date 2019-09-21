@@ -14,14 +14,15 @@ export const types = {
 };
 
 // Actions
-const loadData = key => ({
+const loadData = (key, payload) => ({
   type: DATA_LOAD,
   meta: {
     key,
     loaded: {
       [key]: false
     }
-  }
+  },
+  payload
 });
 
 const loadDataSuccess = (key, data) => ({
