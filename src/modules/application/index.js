@@ -78,7 +78,6 @@ export const actions = {
 // Initial State
 const initialState = {
   loaded: {
-    mockUsers: false,
     places: false
   },
   data: {
@@ -87,14 +86,9 @@ const initialState = {
       distance: 1.5,
       isOpenNow: false
     },
-    mockUsers: [],
     places: []
   },
   errors: {
-    mockUsers: {
-      show: false,
-      message: ''
-    },
     places: {
       show: false,
       message: ''
