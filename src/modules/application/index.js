@@ -72,6 +72,7 @@ export const actions = {
 // Initial State
 const initialState = {
   loaded: {
+    hours: false,
     places: false
   },
   data: {
@@ -80,9 +81,13 @@ const initialState = {
       maxDistance: 1.5,
       isOpenNow: false
     },
+    hours: [],
     places: []
   },
   errors: {
+    hours: {
+      show: false
+    },
     places: {
       show: false
     }
