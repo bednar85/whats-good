@@ -52,6 +52,15 @@ export class Header extends Component {
     this.setState({
       searchQuery
     });
+
+    // get the current location using the Geolocation API
+    // then load data from Yelp
+    navigator.geolocation.getCurrentPosition(position =>
+      this.actions.loadData('places', {
+        term: searchQuery,
+        position: position.coords
+      })
+    );
   }
 
   get sortByText() {

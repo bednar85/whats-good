@@ -5,17 +5,14 @@ import axios from 'axios';
 import { actions, types } from '.';
 import { metersToMiles } from '../../utils';
 
-function yelpBusinessSearch(location) {
+function yelpBusinessSearch(params) {
   return axios.get(
     `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`,
     {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
       },
-      params: {
-        categories: 'coffee',
-        ...location
-      }
+      params
     }
   );
 }
@@ -30,11 +27,12 @@ function yelpBusinessSearch(location) {
 // function yelpBusinessDetails(ids) {}
 
 function* loadPlacesData(action) {
-  const { latitude, longitude } = action.payload;
-  const location = { latitude, longitude };
+  const { term, position } = action.payload;
+  const { latitude, longitude } = position;
+  const params = { term, latitude, longitude };
 
   try {
-    const response = yield call(yelpBusinessSearch, location);
+    const response = yield call(yelpBusinessSearch, params);
 
     const processedData = response.data.businesses.map(datum => ({
       ...datum,
