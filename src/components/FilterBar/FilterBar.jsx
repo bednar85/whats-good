@@ -12,8 +12,7 @@ const { Title } = Typography;
 export class FilterBar extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired,
-    places: PropTypes.array
+    filters: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -22,7 +21,6 @@ export class FilterBar extends Component {
     this.actions = props.actions;
 
     this.hideFilterDrawer = this.hideFilterDrawer.bind(this);
-    this.loadHoursData = this.loadHoursData.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
@@ -144,31 +142,6 @@ export class FilterBar extends Component {
     );
   }
 
-  get openNowToggle() {
-    const { filters } = this.props;
-    const { isOpenNow } = filters;
-
-    const styles = {
-      marginRight: 8
-    };
-
-    return (
-      <div>
-        <Switch
-          id="isOpenNow"
-          style={styles}
-          defaultChecked={isOpenNow}
-          onChange={() =>
-            this.actions.updateFilters({
-              isOpenNow: !isOpenNow
-            })
-          }
-        />
-        <label htmlFor="isOpenNow">Open Now Only</label>
-      </div>
-    );
-  }
-
   showFilterDrawer() {
     this.setState({
       visible: true
@@ -181,14 +154,6 @@ export class FilterBar extends Component {
     });
   }
 
-  loadHoursData() {
-    const { places } = this.props;
-
-    const businessIds = places.map(datum => datum.id);
-
-    this.actions.loadData('hours', businessIds);
-  }
-
   render() {
     const { visible } = this.state;
 
@@ -196,7 +161,6 @@ export class FilterBar extends Component {
       <div>
         {this.filterSummary}
         <Button onClick={this.showFilterDrawer}>Show Filters</Button>
-        <Button onClick={this.loadHoursData}>Load Hours Data</Button>
         <Drawer
           closable={false}
           height="auto"
@@ -205,9 +169,8 @@ export class FilterBar extends Component {
           visible={visible}
         >
           <Row gutter={16}>
-            <Col span={9}>{this.sortByGroup}</Col>
-            <Col span={9}>{this.distanceGroup}</Col>
-            <Col span={6}>{this.openNowToggle}</Col>
+            <Col span={12}>{this.sortByGroup}</Col>
+            <Col span={12}>{this.distanceGroup}</Col>
           </Row>
         </Drawer>
       </div>
