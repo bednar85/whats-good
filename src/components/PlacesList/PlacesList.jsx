@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
 
-import { Loader } from '../Loader/Loader';
+// import { Loader } from '../Loader/Loader';
 
 import { actions } from '../../modules/application';
 
@@ -14,9 +14,9 @@ const { Text, Title } = Typography;
 export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    error: PropTypes.object.isRequired,
+    // error: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
-    loaded: PropTypes.bool.isRequired,
+    // loaded: PropTypes.bool.isRequired,
     places: PropTypes.array.isRequired
   };
 
@@ -29,13 +29,13 @@ export class PlacesList extends Component {
     this.placeClass = 'wg-place';
   }
 
-  componentDidMount() {
-    // get the current location with the browser's Geolocation API
-    // then load data from Yelp
-    navigator.geolocation.getCurrentPosition(position =>
-      this.actions.loadData('places', position.coords)
-    );
-  }
+  // componentDidMount() {
+  //   // get the current location with the browser's Geolocation API
+  //   // then load data from Yelp
+  //   navigator.geolocation.getCurrentPosition(position =>
+  //     this.actions.loadData('places', position.coords)
+  //   );
+  // }
 
   get sortedAndFilteredData() {
     const { filters, places } = this.props;
@@ -118,13 +118,15 @@ export class PlacesList extends Component {
   }
 
   render() {
-    const { loaded, error } = this.props;
+    // const { loaded, error } = this.props;
 
-    return (
-      <div className={this.placesListClass}>
-        <Loader loaded={loaded} error={error} render={() => this.places} />
-      </div>
-    );
+    // return (
+    //   <div className={this.placesListClass}>
+    //     <Loader loaded={loaded} error={error} render={() => this.places} />
+    //   </div>
+    // );
+
+    return <div className={this.placesListClass}>{this.places}</div>;
   }
 }
 
