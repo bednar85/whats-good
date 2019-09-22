@@ -1,12 +1,12 @@
 import React from 'react';
 
-import FilterBar from './components/FilterBar/FilterBar';
+import Header from './components/Header/Header';
 import PlacesList from './components/PlacesList/PlacesList';
 
 function App() {
   return (
     <div className="app">
-      <FilterBar />
+      <Header />
       <PlacesList />
     </div>
   );

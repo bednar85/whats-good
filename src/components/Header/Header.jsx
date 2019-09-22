@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Button, Col, Drawer, Radio, Row, Switch, Typography } from 'antd';
+import { Button, Col, Drawer, Radio, Row, Typography } from 'antd';
 
 import { actions } from '../../modules/application';
 
 const { Title } = Typography;
 
-export class FilterBar extends Component {
+export class Header extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired
@@ -80,10 +80,7 @@ export class FilterBar extends Component {
   get filterSummary() {
     return (
       <Title className="wg-filter-bar-summary" level={2}>
-        The {this.sortByText}
-        {' '}
-        (category / search query) spots in Philly, within
-        {' '}
+        The {this.sortByText} (category / search query) spots in Philly, within{' '}
         {this.distanceText} of you.
       </Title>
     );
@@ -185,4 +182,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FilterBar);
+)(Header);
