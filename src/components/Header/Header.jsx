@@ -13,7 +13,8 @@ const { Title } = Typography;
 export class Header extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired
+    filters: PropTypes.object.isRequired,
+    searchQuery: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -37,7 +38,6 @@ export class Header extends Component {
     };
 
     this.state = {
-      searchQuery: '',
       visible: false
     };
   }
@@ -49,9 +49,7 @@ export class Header extends Component {
   }
 
   onSearch(searchQuery) {
-    this.setState({
-      searchQuery
-    });
+    this.actions.updateSearchQuery(searchQuery);
 
     if (searchQuery.length) {
       // get the current location using the Geolocation API
@@ -98,7 +96,7 @@ export class Header extends Component {
   }
 
   get filterSummary() {
-    const { searchQuery } = this.state;
+    const { searchQuery } = this.props;
 
     const searchQueryIsSingular = searchQuery.slice(-1) !== 's';
 
@@ -204,7 +202,8 @@ export class Header extends Component {
 
 const mapStateToProps = state => ({
   filters: state.data.filters,
-  places: state.data.places
+  places: state.data.places,
+  searchQuery: state.data.searchQuery
 });
 
 const mapDispatchToProps = dispatch => ({
