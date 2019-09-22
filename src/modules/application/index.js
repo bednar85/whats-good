@@ -4,13 +4,15 @@ const DATA_LOAD_SUCCESS = 'application/DATA_LOAD_SUCCESS';
 const ERROR_HIDE = 'application/ERROR_HIDE';
 const ERROR_SHOW = 'application/ERROR_SHOW';
 const FILTERS_UPDATE = 'application/FILTERS_UPDATE';
+const SEARCH_QUERY_UPDATE = 'application/SEARCH_QUERY_UPDATE';
 
 export const types = {
   DATA_LOAD,
   DATA_LOAD_SUCCESS,
-  ERROR_HIDE,
   ERROR_SHOW,
-  FILTERS_UPDATE
+  ERROR_HIDE,
+  FILTERS_UPDATE,
+  SEARCH_QUERY_UPDATE
 };
 
 // Actions
@@ -61,12 +63,18 @@ const updateFilters = payload => ({
   payload
 });
 
+const updateSearchQuery = payload => ({
+  type: SEARCH_QUERY_UPDATE,
+  payload
+});
+
 export const actions = {
-  hideError,
   loadData,
   loadDataSuccess,
   showError,
-  updateFilters
+  hideError,
+  updateFilters,
+  updateSearchQuery
 };
 
 // Initial State
@@ -82,7 +90,8 @@ const initialState = {
       isOpenNow: false
     },
     hours: [],
-    places: []
+    places: [],
+    searchQuery: ''
   },
   errors: {
     hours: {
@@ -110,6 +119,11 @@ const dataReducer = (state, action) => {
           ...action.payload
         }
       };
+    case SEARCH_QUERY_UPDATE:
+      return {
+        ...state,
+        searchQuery: action.payload
+      };
     default:
       return state;
   }
@@ -135,6 +149,7 @@ const rootReducer = (state = initialState, action) => {
         errors: { ...state.errors, ...action.payload }
       };
     case FILTERS_UPDATE:
+    case SEARCH_QUERY_UPDATE:
       return {
         ...state,
         data: dataReducer(state.data, action)
