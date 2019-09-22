@@ -24,7 +24,7 @@ export class Header extends Component {
 
     this.hideFilterDrawer = this.hideFilterDrawer.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
-    this.onSearch = this.onSearch.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
     this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
     this.radioGroupStyles = {
@@ -48,7 +48,7 @@ export class Header extends Component {
     });
   }
 
-  onSearch(searchQuery) {
+  onSearchChange(searchQuery) {
     this.actions.updateSearchQuery(searchQuery);
 
     if (searchQuery.length) {
@@ -175,7 +175,7 @@ export class Header extends Component {
       <div className="wg-filter-bar">
         <Search
           placeholder="enter a food or drink"
-          onSearch={this.onSearch}
+          onSearch={this.onSearchChange}
           style={{ width: 200 }}
           size="large"
         />
