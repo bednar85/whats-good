@@ -51,13 +51,13 @@ export class FilterBar extends Component {
 
     switch (sortBy) {
       case 'Closest To You':
-        return 'The closest coffee spots in Philly';
+        return 'closest';
       case 'Highest Rated':
-        return 'The highest rated coffee spots in Philly';
+        return 'highest rated';
       case 'Most Reviewed':
-        return 'The most reviewed coffee spots in Philly';
+        return 'most reviewed';
       default:
-        return 'The best coffee spots in Philly';
+        return '';
     }
   }
 
@@ -67,29 +67,24 @@ export class FilterBar extends Component {
 
     switch (maxDistance) {
       case 0.5:
-        return ', 4 blocks or less away from you';
+        return '4 blocks of you';
       case 1.5:
-        return ', within walking distance of you';
+        return 'walking distance of you';
       case 5:
-        return ', within bus/subway distance of you';
+        return 'bus/subway distance of you';
       default:
         return '';
     }
   }
 
-  get openNowText() {
-    const { filters } = this.props;
-    const { isOpenNow } = filters;
-
-    return isOpenNow ? ', which are open now.' : '.';
-  }
-
   get filterSummary() {
     return (
       <Title className="wg-filter-bar-summary" level={2}>
-        {this.sortByText}
-        {this.distanceText}
-        {this.openNowText}
+        The {this.sortByText}
+        {' '}
+        (category / search query) spots in Philly, within
+        {' '}
+        {this.distanceText} of you.
       </Title>
     );
   }
