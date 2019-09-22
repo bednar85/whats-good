@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Button, Col, Drawer, Radio, Row, Typography } from 'antd';
+import { Button, Col, Drawer, Input, Radio, Row, Typography } from 'antd';
 
 import { actions } from '../../modules/application';
 
+const { Search } = Input;
 const { Title } = Typography;
 
 export class Header extends Component {
@@ -22,6 +23,7 @@ export class Header extends Component {
 
     this.hideFilterDrawer = this.hideFilterDrawer.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.onSearch = this.onSearch.bind(this);
     this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
     this.radioGroupStyles = {
@@ -35,6 +37,7 @@ export class Header extends Component {
     };
 
     this.state = {
+      searchQuery: '',
       visible: false
     };
   }
@@ -42,6 +45,12 @@ export class Header extends Component {
   onFilterChange(event) {
     this.actions.updateFilters({
       [event.target.name]: event.target.value
+    });
+  }
+
+  onSearch(searchQuery) {
+    this.setState({
+      searchQuery
     });
   }
 
@@ -78,12 +87,14 @@ export class Header extends Component {
   }
 
   get filterSummary() {
-    return (
+    const { searchQuery } = this.state;
+
+    return searchQuery.length ? (
       <Title className="wg-filter-bar-summary" level={2}>
-        The {this.sortByText} (category / search query) spots in Philly, within{' '}
-        {this.distanceText} of you.
+        The {this.sortByText} {searchQuery} spots within {this.distanceText}
+        of you.
       </Title>
-    );
+    ) : null;
   }
 
   get sortByGroup() {
@@ -151,8 +162,11 @@ export class Header extends Component {
 
     return (
       <div className="wg-filter-bar">
+        <Search onSearch={this.onSearch} style={{ width: 200 }} size="large" />
         {this.filterSummary}
-        <Button onClick={this.showFilterDrawer}>Show Filters</Button>
+        <Button onClick={this.showFilterDrawer} size="large">
+          Show Filters
+        </Button>
         <Drawer
           closable={false}
           height="auto"
