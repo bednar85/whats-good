@@ -17,7 +17,8 @@ export class PlacesList extends Component {
     // error: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     // loaded: PropTypes.bool.isRequired,
-    places: PropTypes.array.isRequired
+    places: PropTypes.array.isRequired,
+    searchQuery: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -126,6 +127,12 @@ export class PlacesList extends Component {
     //   </div>
     // );
 
+    const { searchQuery } = this.props;
+
+    if (!searchQuery.length) {
+      return <div className={this.placesListClass}>Enter a search term</div>;
+    }
+
     return <div className={this.placesListClass}>{this.places}</div>;
   }
 }
@@ -134,7 +141,8 @@ const mapStateToProps = state => ({
   error: state.errors.places,
   filters: state.data.filters,
   loaded: state.loaded.places,
-  places: state.data.places
+  places: state.data.places,
+  searchQuery: state.data.searchQuery
 });
 
 const mapDispatchToProps = dispatch => ({
