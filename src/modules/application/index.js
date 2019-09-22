@@ -117,7 +117,8 @@ const dataReducer = (state, action) => {
     case SEARCH_QUERY_UPDATE:
       return {
         ...state,
-        searchQuery: action.payload
+        searchQuery: action.payload,
+        places: initialState.data.places
       };
     default:
       return state;
@@ -144,10 +145,16 @@ const rootReducer = (state = initialState, action) => {
         errors: { ...state.errors, ...action.payload }
       };
     case FILTERS_UPDATE:
-    case SEARCH_QUERY_UPDATE:
       return {
         ...state,
         data: dataReducer(state.data, action)
+      };
+    case SEARCH_QUERY_UPDATE:
+      return {
+        ...state,
+        loaded: { ...state.loaded, places: initialState.loaded.places },
+        data: dataReducer(state.data, action),
+        errors: { ...state.errors, places: initialState.errors.places }
       };
     default:
       return state;
