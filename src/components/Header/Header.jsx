@@ -76,11 +76,11 @@ export class Header extends Component {
 
     switch (maxDistance) {
       case 0.5:
-        return '4 blocks of you';
+        return '4 blocks';
       case 1.5:
-        return 'walking distance of you';
+        return 'walking distance';
       case 5:
-        return 'bus/subway distance of you';
+        return 'bus/subway distance';
       default:
         return '';
     }
@@ -89,10 +89,12 @@ export class Header extends Component {
   get filterSummary() {
     const { searchQuery } = this.state;
 
+    const searchQueryIsSingular = searchQuery.slice(-1) !== 's';
+
     return searchQuery.length ? (
       <Title className="wg-filter-bar-summary" level={2}>
-        The {this.sortByText} {searchQuery} spots within {this.distanceText}
-        of you.
+        The {this.sortByText} spots to get {searchQueryIsSingular && 'a'}{' '}
+        {searchQuery} within {this.distanceText} of you.
       </Title>
     ) : null;
   }
@@ -162,7 +164,12 @@ export class Header extends Component {
 
     return (
       <div className="wg-filter-bar">
-        <Search onSearch={this.onSearch} style={{ width: 200 }} size="large" />
+        <Search
+          placeholder="enter a food or drink"
+          onSearch={this.onSearch}
+          style={{ width: 200 }}
+          size="large"
+        />
         {this.filterSummary}
         <Button onClick={this.showFilterDrawer} size="large">
           Show Filters
