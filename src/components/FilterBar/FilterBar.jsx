@@ -86,7 +86,7 @@ export class FilterBar extends Component {
 
   get filterSummary() {
     return (
-      <Title level={4}>
+      <Title className="wg-filter-bar-summary" level={2}>
         {this.sortByText}
         {this.distanceText}
         {this.openNowText}
@@ -158,7 +158,7 @@ export class FilterBar extends Component {
     const { visible } = this.state;
 
     return (
-      <div>
+      <div className="wg-filter-bar">
         {this.filterSummary}
         <Button onClick={this.showFilterDrawer}>Show Filters</Button>
         <Drawer
