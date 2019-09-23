@@ -20,7 +20,11 @@ export class Loader extends Component {
     const { loaded, error, render } = this.props;
 
     if (!loaded) {
-      return this.hasError ? <div>{error.message}</div> : <Spinner />;
+      return this.hasError ? (
+        <div className="wg-service-error">{error.message}</div>
+      ) : (
+        <Spinner />
+      );
     }
 
     return render();

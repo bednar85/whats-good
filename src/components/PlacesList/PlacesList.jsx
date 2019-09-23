@@ -27,7 +27,7 @@ export class PlacesList extends Component {
     this.actions = props.actions;
 
     this.placesListClass = 'wg-places-list';
-    this.placeClass = 'wg-place';
+    this.placeClass = `${this.placesListClass}-place`;
   }
 
   get sortedAndFilteredData() {
@@ -99,9 +99,8 @@ export class PlacesList extends Component {
         );
       })
     ) : (
-      <div>
-        Sorry, there are no locations that match the filters you&apos;ve
-        selected.
+      <div className={`${this.placesListClass}-no-results`}>
+        <Title level={4}>Sorry, there are no locations that match.</Title>
       </div>
     );
   }
