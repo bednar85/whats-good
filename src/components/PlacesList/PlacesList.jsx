@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
 
-// import { Loader } from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
 
 import { actions } from '../../modules/application';
 
@@ -14,9 +14,9 @@ const { Text, Title } = Typography;
 export class PlacesList extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    // error: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
-    // loaded: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
     places: PropTypes.array.isRequired,
     searchQuery: PropTypes.string.isRequired
   };
@@ -29,14 +29,6 @@ export class PlacesList extends Component {
     this.placesListClass = 'wg-places-list';
     this.placeClass = 'wg-place';
   }
-
-  // componentDidMount() {
-  //   // get the current location with the browser's Geolocation API
-  //   // then load data from Yelp
-  //   navigator.geolocation.getCurrentPosition(position =>
-  //     this.actions.loadData('places', position.coords)
-  //   );
-  // }
 
   get sortedAndFilteredData() {
     const { filters, places } = this.props;
@@ -72,10 +64,6 @@ export class PlacesList extends Component {
     return this.sortedAndFilteredData.length ? (
       this.sortedAndFilteredData.map(place => {
         const { distance, id, location, name, rating, review_count } = place;
-
-        // is_closed is referring to if the location is permanetly closed not it's hours of operation
-        // if I want to do that I'll need to make other adjustments
-        // const closedClass = is_closed && `${this.placeClass}--is-closed`;
 
         return (
           <div className={this.placeClass} key={id}>
@@ -119,21 +107,17 @@ export class PlacesList extends Component {
   }
 
   render() {
-    // const { loaded, error } = this.props;
-
-    // return (
-    //   <div className={this.placesListClass}>
-    //     <Loader loaded={loaded} error={error} render={() => this.places} />
-    //   </div>
-    // );
-
-    const { searchQuery } = this.props;
+    const { loaded, error, searchQuery } = this.props;
 
     if (!searchQuery.length) {
-      return <div className={this.placesListClass}>Enter a search term</div>;
+      return null;
     }
 
-    return <div className={this.placesListClass}>{this.places}</div>;
+    return (
+      <div className={this.placesListClass}>
+        <Loader loaded={loaded} error={error} render={() => this.places} />
+      </div>
+    );
   }
 }
 
