@@ -1,13 +1,9 @@
 import React from 'react';
 
-import { Spin, Icon } from 'antd';
-
 function Spinner() {
-  const spinnerIcon = <Icon type="loading" style={{ fontSize: 40 }} spin />;
-
   return (
     <div className="wg-spinner">
-      <Spin indicator={spinnerIcon} />
+      <img src="/images/puff.svg" width="100" alt="Loading..." />
     </div>
   );
 }
