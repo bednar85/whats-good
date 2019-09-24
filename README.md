@@ -1,11 +1,13 @@
 # What's Good
-I'm revisiting my [When In Rome](https://github.com/bednar85/when-in-rome) which is a React based web app that sorts and filters a curated version of Yelp data (cafes, restaurants, ice cream shops, and historical landmarks). 
 
-This version is using mock JSON I formed based on a coffee shop search in Fishtown, Philadelphia using Yelp.
+This is my latest iteration of [When In Rome](https://github.com/bednar85/when-in-rome) a React app I created for sorting and filtering a curated set of data (cafes, restaurants, ice cream shops, and historical landmarks).
+
+In this version, I integrated the Yelp API and make requests for data based on a search term input from the user and the user's geolocation.
 
 ## Technologies
 It's currently using the following technologies:
 - Webpack + Babel + ES6
 - Reactjs
-- Redux
+- Redux + Sagas
 - Ant Design UI Component Library
+- SASS
