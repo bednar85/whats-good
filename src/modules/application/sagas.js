@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { actions, types } from '.';
+import applicationSelectors from './selectors';
 import { metersToMiles } from '../../utils';
 
 function yelpBusinessSearch(params) {
@@ -27,9 +28,21 @@ function yelpBusinessSearch(params) {
 // function yelpBusinessDetails(ids) {}
 
 function* loadPlacesData(action) {
+  // extract data from the payload
   const { term, position } = action.payload;
   const { latitude, longitude } = position;
-  const params = { term, latitude, longitude };
+
+  // extract data from the store
+  const filters = yield select(applicationSelectors.getFilters);
+  const { isOpenNow } = filters;
+
+  // form the search params
+  const params = {
+    term,
+    latitude,
+    longitude,
+    open_now: isOpenNow
+  };
 
   try {
     const response = yield call(yelpBusinessSearch, params);

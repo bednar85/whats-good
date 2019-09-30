@@ -1,10 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Button, Col, Drawer, Input, Radio, Row, Typography } from 'antd';
-
+import {
+  Button,
+  Col,
+  Drawer,
+  Input,
+  Radio,
+  Row,
+  Switch,
+  Typography
+} from 'antd';
 
 import applicationSelectors from '../../modules/application/selectors';
 import { actions } from '../../modules/application';
@@ -160,6 +168,31 @@ export class Header extends Component {
     );
   }
 
+  get openNowToggle() {
+    const { filters } = this.props;
+    const { isOpenNow } = filters;
+
+    const styles = {
+      marginRight: 8
+    };
+
+    return (
+      <Fragment>
+        <Switch
+          id="isOpenNow"
+          style={styles}
+          defaultChecked={isOpenNow}
+          onChange={() =>
+            this.actions.updateFilters({
+              isOpenNow: !isOpenNow
+            })
+          }
+        />
+        <label htmlFor="isOpenNow">Open Now Only</label>
+      </Fragment>
+    );
+  }
+
   showFilterDrawer() {
     this.setState({
       visible: true
@@ -185,8 +218,9 @@ export class Header extends Component {
           visible={visible}
         >
           <Row gutter={16}>
-            <Col span={12}>{this.sortByGroup}</Col>
-            <Col span={12}>{this.distanceGroup}</Col>
+            <Col span={9}>{this.sortByGroup}</Col>
+            <Col span={9}>{this.distanceGroup}</Col>
+            <Col span={6}>{this.openNowToggle}</Col>
           </Row>
         </Drawer>
         <Button
