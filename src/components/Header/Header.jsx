@@ -27,6 +27,8 @@ export class Header extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.showFilterDrawer = this.showFilterDrawer.bind(this);
 
+    this.baseClass = 'wg-header';
+
     this.radioGroupStyles = {
       verticalAlign: 'top'
     };
@@ -101,7 +103,7 @@ export class Header extends Component {
     const searchQueryIsSingular = searchQuery.slice(-1) !== 's';
 
     return searchQuery.length ? (
-      <Title className="wg-filter-bar-summary" level={2}>
+      <Title className={`${this.baseClass}-filter-summary`} level={2}>
         The {this.sortByText} spots to get {searchQueryIsSingular && 'a'}{' '}
         {searchQuery} within {this.distanceText} of you.
       </Title>
@@ -172,7 +174,7 @@ export class Header extends Component {
     const { visible } = this.state;
 
     return (
-      <div className="wg-filter-bar">
+      <div className={this.baseClass}>
         <Drawer
           closable={false}
           height="auto"
@@ -186,14 +188,14 @@ export class Header extends Component {
           </Row>
         </Drawer>
         <Button
-          className="wg-filter-bar-show-filters-button"
+          className={`${this.baseClass}-show-filters-button`}
           onClick={this.showFilterDrawer}
           size="large"
         >
           Show Filters
         </Button>
         <Search
-          className="wg-filter-bar-search-input"
+          className={`${this.baseClass}-search-input`}
           placeholder="enter a food or drink"
           onSearch={this.onSearchChange}
           style={{ width: 200 }}

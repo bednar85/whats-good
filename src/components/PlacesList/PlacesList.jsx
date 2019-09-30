@@ -26,8 +26,8 @@ export class PlacesList extends Component {
 
     this.actions = props.actions;
 
-    this.placesListClass = 'wg-places-list';
-    this.placeClass = `${this.placesListClass}-place`;
+    this.baseClass = 'wg-places-list';
+    this.placeClass = `${this.baseClass}-place`;
   }
 
   get sortedAndFilteredData() {
@@ -99,7 +99,7 @@ export class PlacesList extends Component {
         );
       })
     ) : (
-      <div className={`${this.placesListClass}-no-results`}>
+      <div className={`${this.baseClass}-no-results`}>
         <Title level={4}>Sorry, there are no locations that match.</Title>
       </div>
     );
@@ -113,7 +113,7 @@ export class PlacesList extends Component {
     }
 
     return (
-      <div className={this.placesListClass}>
+      <div className={this.baseClass}>
         <Loader loaded={loaded} error={error} render={() => this.places} />
       </div>
     );

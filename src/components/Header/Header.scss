@@ -1,4 +1,4 @@
-.wg-filter-bar {
+.wg-header {
   background: rgb(128,180,255);
   background: linear-gradient(0deg, rgba(128,180,255,1) 0%, rgba(255,255,255,1) 100%);
   padding: 80px;
@@ -15,5 +15,5 @@
     display: block;
   }
 
-  // &-summary {}
+  // &-filter-summary {}
 }
