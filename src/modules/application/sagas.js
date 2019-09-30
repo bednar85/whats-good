@@ -18,15 +18,6 @@ function yelpBusinessSearch(params) {
   );
 }
 
-/**
- * I'm not able to get hours data on all of the results at once
- * I tried with an axios.all and got this error
- * Request failed with status code 429 (Too Many Requests)
- * I'll need to either do this call on a detail page
- * or integrate GraphQL to handle making requests that way
- */
-// function yelpBusinessDetails(ids) {}
-
 function* loadPlacesData(action) {
   // extract data from the payload
   const { term, position } = action.payload;
@@ -57,10 +48,6 @@ function* loadPlacesData(action) {
     yield put(actions.showError('places', error.message));
   }
 }
-
-// function* loadHoursData(action) {
-//   yield* yelpBusinessDetails(action.payload);
-// }
 
 /**
  * if I need to handle loading data in different ways
