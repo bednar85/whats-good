@@ -8,6 +8,10 @@ const getErrors = state => {
   return state.errors;
 };
 
+const getLoadedStatus = state => {
+  return state.loaded;
+};
+
 const getFilters = createSelector(
   getData,
   data => {
@@ -15,9 +19,19 @@ const getFilters = createSelector(
   }
 );
 
-const getLoadedStatus = state => {
-  return state.loaded;
-};
+const getPlacesLoaded = createSelector(
+  getLoadedStatus,
+  loadedStatuses => {
+    return loadedStatuses.places;
+  }
+);
+
+const getPlacesError = createSelector(
+  getErrors,
+  errors => {
+    return errors.places;
+  }
+);
 
 const getPlaces = createSelector(
   getData,
@@ -39,6 +53,8 @@ const selectors = {
   getFilters,
   getLoadedStatus,
   getPlaces,
+  getPlacesError,
+  getPlacesLoaded,
   getSearchQuery
 };
 

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { Button, Col, Drawer, Input, Radio, Row, Typography } from 'antd';
 
+
+import applicationSelectors from '../../modules/application/selectors';
 import { actions } from '../../modules/application';
 
 const { Search } = Input;
@@ -208,9 +210,9 @@ export class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  filters: state.data.filters,
-  places: state.data.places,
-  searchQuery: state.data.searchQuery
+  filters: applicationSelectors.getFilters(state),
+  places: applicationSelectors.getPlaces(state),
+  searchQuery: applicationSelectors.getSearchQuery(state)
 });
 
 const mapDispatchToProps = dispatch => ({

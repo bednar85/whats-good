@@ -7,6 +7,7 @@ import { Rate, Typography } from 'antd';
 
 import { Loader } from '../Loader/Loader';
 
+import applicationSelectors from '../../modules/application/selectors';
 import { actions } from '../../modules/application';
 
 const { Text, Title } = Typography;
@@ -121,11 +122,11 @@ export class PlacesList extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.errors.places,
-  filters: state.data.filters,
-  loaded: state.loaded.places,
-  places: state.data.places,
-  searchQuery: state.data.searchQuery
+  error: applicationSelectors.getPlacesError(state),
+  filters: applicationSelectors.getFilters(state),
+  loaded: applicationSelectors.getPlacesLoaded(state),
+  places: applicationSelectors.getPlaces(state),
+  searchQuery: applicationSelectors.getSearchQuery(state)
 });
 
 const mapDispatchToProps = dispatch => ({
