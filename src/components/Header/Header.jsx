@@ -173,16 +173,6 @@ export class Header extends Component {
 
     return (
       <div className="wg-filter-bar">
-        <Search
-          placeholder="enter a food or drink"
-          onSearch={this.onSearchChange}
-          style={{ width: 200 }}
-          size="large"
-        />
-        {this.filterSummary}
-        <Button onClick={this.showFilterDrawer} size="large">
-          Show Filters
-        </Button>
         <Drawer
           closable={false}
           height="auto"
@@ -195,6 +185,21 @@ export class Header extends Component {
             <Col span={12}>{this.distanceGroup}</Col>
           </Row>
         </Drawer>
+        <Button
+          className="wg-filter-bar-show-filters-button"
+          onClick={this.showFilterDrawer}
+          size="large"
+        >
+          Show Filters
+        </Button>
+        <Search
+          className="wg-filter-bar-search-input"
+          placeholder="enter a food or drink"
+          onSearch={this.onSearchChange}
+          style={{ width: 200 }}
+          size="large"
+        />
+        {this.filterSummary}
       </div>
     );
   }

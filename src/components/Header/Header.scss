@@ -2,8 +2,18 @@
   background: rgb(128,180,255);
   background: linear-gradient(0deg, rgba(128,180,255,1) 0%, rgba(255,255,255,1) 100%);
   padding: 80px;
+  position: relative;
 
-  .wg-filter-bar-summary {
-    margin-bottom: 0.5em;
+  &-show-filters-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
   }
+
+  &-search-input {
+    margin: 0 auto 20px;
+    display: block;
+  }
+
+  // &-summary {}
 }
