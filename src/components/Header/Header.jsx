@@ -188,7 +188,7 @@ export class Header extends Component {
             })
           }
         />
-        <label htmlFor="isOpenNow">Open Now Only</label>
+        <label htmlFor="isOpenNow">Open Now</label>
       </Fragment>
     );
   }
