@@ -55,8 +55,10 @@ export class Header extends Component {
   }
 
   onFilterChange(event) {
+    const { name, value } = event.target;
+
     this.actions.updateFilters({
-      [event.target.name]: event.target.value
+      [name]: value
     });
   }
 
@@ -169,7 +171,7 @@ export class Header extends Component {
   }
 
   get openNowToggle() {
-    const { filters } = this.props;
+    const { filters, searchQuery } = this.props;
     const { isOpenNow } = filters;
 
     const styles = {
@@ -182,11 +184,13 @@ export class Header extends Component {
           id="isOpenNow"
           style={styles}
           defaultChecked={isOpenNow}
-          onChange={() =>
+          onChange={() => {
             this.actions.updateFilters({
               isOpenNow: !isOpenNow
-            })
-          }
+            });
+
+            this.onSearchChange(searchQuery);
+          }}
         />
         <label htmlFor="isOpenNow">Open Now</label>
       </Fragment>
