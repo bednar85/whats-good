@@ -18,6 +18,14 @@ function yelpBusinessSearch(params) {
   );
 }
 
+function googleMapsReverseGeocode(params) {
+  const { latitude, longitude } = params;
+
+  return axios.get(
+    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+  );
+}
+
 function* loadPlacesData(action) {
   // extract data from the payload
   const { term, position } = action.payload;
