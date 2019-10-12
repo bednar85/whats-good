@@ -46,12 +46,12 @@ function* loadPlacesData(action) {
   try {
     const response = yield call(yelpBusinessSearch, params);
 
-    const processedData = response.data.businesses.map(datum => ({
+    const placesData = response.data.businesses.map(datum => ({
       ...datum,
       distance: metersToMiles(datum.distance)
     }));
 
-    yield put(actions.loadDataSuccess('places', processedData));
+    yield put(actions.loadDataSuccess('places', placesData));
   } catch (error) {
     yield put(actions.showError('places', error.message));
   }
