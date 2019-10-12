@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { actions, types } from '.';
