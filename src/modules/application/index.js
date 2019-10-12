@@ -124,8 +124,6 @@ const dataReducer = (state, action) => {
         }
       };
     case CURRENT_LOCATION_SET:
-      console.log('action:', action);
-
       return {
         ...state,
         location: action.payload
@@ -162,8 +160,6 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTERS_UPDATE:
     case CURRENT_LOCATION_SET:
-      console.log('action:', action);
-
       return {
         ...state,
         data: dataReducer(state.data, action)
