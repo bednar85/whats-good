@@ -102,6 +102,22 @@ export class Header extends Component {
     }
   }
 
+  get locationText() {
+    const { filters, location } = this.props;
+    const { maxDistance } = filters;
+    const { neighborhood, city } = location;
+
+    switch (maxDistance) {
+      case 0.5:
+      case 1.5:
+        return neighborhood;
+      case 5:
+        return city;
+      default:
+        return neighborhood;
+    }
+  }
+
   get distanceText() {
     const { filters } = this.props;
     const { maxDistance } = filters;
@@ -126,7 +142,7 @@ export class Header extends Component {
     return searchTerm.length ? (
       <Title className={`${this.baseClass}-filter-summary`} level={2}>
         The {this.sortByText} spots to get {searchTermIsSingular && 'a'}{' '}
-        {searchTerm} within {this.distanceText} of you.
+        {searchTerm} in {this.locationText} within {this.distanceText} of you.
       </Title>
     ) : null;
   }
