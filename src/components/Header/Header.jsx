@@ -248,7 +248,7 @@ export class Header extends Component {
           />
         </div>
         <div className={`${this.baseClass}-search-input-wrapper`}>
-          <Loader loaded={false} asOverlay />
+          <Loader loaded={locationLoaded} asOverlay />
           <Search
             className={`${this.baseClass}-search-input`}
             prefix="Near"
