@@ -9,7 +9,7 @@ import PlacesList from './components/PlacesList/PlacesList';
 import { actions } from './modules/application';
 
 function App(props) {
-  // get the current position on load
+  // get the current location using the Geolocation API and Google Maps API
   navigator.geolocation.getCurrentPosition(position =>
     props.actions.loadData('location', position.coords)
   );
