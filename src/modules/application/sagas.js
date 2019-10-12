@@ -28,8 +28,10 @@ function googleMapsReverseGeocode(params) {
 
 function* loadPlacesData(action) {
   // extract data from the payload
-  const { term, position } = action.payload;
-  const { latitude, longitude } = position;
+  const { term } = action.payload;
+  const { latitude, longitude } = yield select(
+    applicationSelectors.getCoordinates
+  );
 
   // extract data from the store
   const filters = yield select(applicationSelectors.getFilters);

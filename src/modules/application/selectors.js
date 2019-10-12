@@ -40,6 +40,13 @@ const getLocation = createSelector(
   }
 );
 
+const getCoordinates = createSelector(
+  getLocation,
+  location => {
+    return location.coordinates;
+  }
+);
+
 const getPlacesLoaded = createSelector(
   getLoadedStatus,
   loadedStatuses => {
@@ -69,6 +76,7 @@ const getSearchQuery = createSelector(
 );
 
 const selectors = {
+  getCoordinates,
   getData,
   getErrors,
   getFilters,

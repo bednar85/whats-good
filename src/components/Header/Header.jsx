@@ -70,17 +70,19 @@ export class Header extends Component {
   }
 
   onSearchChange(searchQuery) {
+    const { locationLoaded } = this.props;
+
     this.actions.updateSearchQuery(searchQuery);
 
-    if (searchQuery.length) {
-      // get the current location using the Geolocation API
-      // then load data from Yelp
-      navigator.geolocation.getCurrentPosition(position =>
-        this.actions.loadData('places', {
-          term: searchQuery,
-          position: position.coords
-        })
-      );
+    /**
+     * if location is loaded
+     * and there is a search query
+     * try loading places data from Yelp
+     */
+    if (locationLoaded && searchQuery.length) {
+      this.actions.loadData('places', {
+        term: searchQuery
+      });
     }
   }
 
