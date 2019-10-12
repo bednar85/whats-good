@@ -25,7 +25,13 @@ export class Header extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
+    location: PropTypes.object,
+    locationLoaded: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    location: {}
   };
 
   constructor(props) {
@@ -199,6 +205,9 @@ export class Header extends Component {
   }
 
   get searchInputs() {
+    const { location, locationLoaded } = this.props;
+    const { neighborhood } = location;
+
     const inputStyles = {
       minWidth: 275,
       width: '30%'
@@ -213,11 +222,13 @@ export class Header extends Component {
           onSearch={this.onSearchChange}
           style={inputStyles}
           size="large"
+          disabled={!locationLoaded}
           enterButton
         />
         <Search
           className={`${this.baseClass}-search-input`}
           prefix="Near"
+          value={neighborhood}
           onSearch={this.onSearchChange}
           style={inputStyles}
           size="large"
@@ -273,6 +284,8 @@ export class Header extends Component {
 
 const mapStateToProps = state => ({
   filters: applicationSelectors.getFilters(state),
+  location: applicationSelectors.getLocation(state),
+  locationLoaded: applicationSelectors.getLocationLoaded(state),
   places: applicationSelectors.getPlaces(state),
   searchQuery: applicationSelectors.getSearchQuery(state)
 });
