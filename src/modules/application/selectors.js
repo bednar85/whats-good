@@ -68,10 +68,10 @@ const getPlaces = createSelector(
   }
 );
 
-const getSearchQuery = createSelector(
+const getSearchTerm = createSelector(
   getData,
   data => {
-    return data.searchQuery;
+    return data.searchTerm;
   }
 );
 
@@ -87,7 +87,7 @@ const selectors = {
   getPlaces,
   getPlacesError,
   getPlacesLoaded,
-  getSearchQuery
+  getSearchTerm
 };
 
 export default selectors;

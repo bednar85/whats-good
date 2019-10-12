@@ -27,7 +27,7 @@ export class Header extends Component {
     filters: PropTypes.object.isRequired,
     location: PropTypes.object,
     locationLoaded: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string.isRequired
+    searchTerm: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -69,19 +69,19 @@ export class Header extends Component {
     });
   }
 
-  onSearchChange(searchQuery) {
+  onSearchChange(searchTerm) {
     const { locationLoaded } = this.props;
 
-    this.actions.updateSearchQuery(searchQuery);
+    this.actions.updateSearchTerm(searchTerm);
 
     /**
      * if location is loaded
      * and there is a search query
      * try loading places data from Yelp
      */
-    if (locationLoaded && searchQuery.length) {
+    if (locationLoaded && searchTerm.length) {
       this.actions.loadData('places', {
-        term: searchQuery
+        term: searchTerm
       });
     }
   }
@@ -119,14 +119,14 @@ export class Header extends Component {
   }
 
   get filterSummary() {
-    const { searchQuery } = this.props;
+    const { searchTerm } = this.props;
 
-    const searchQueryIsSingular = searchQuery.slice(-1) !== 's';
+    const searchTermIsSingular = searchTerm.slice(-1) !== 's';
 
-    return searchQuery.length ? (
+    return searchTerm.length ? (
       <Title className={`${this.baseClass}-filter-summary`} level={2}>
-        The {this.sortByText} spots to get {searchQueryIsSingular && 'a'}{' '}
-        {searchQuery} within {this.distanceText} of you.
+        The {this.sortByText} spots to get {searchTermIsSingular && 'a'}{' '}
+        {searchTerm} within {this.distanceText} of you.
       </Title>
     ) : null;
   }
@@ -180,7 +180,7 @@ export class Header extends Component {
   }
 
   get openNowToggle() {
-    const { filters, searchQuery } = this.props;
+    const { filters, searchTerm } = this.props;
     const { isOpenNow } = filters;
 
     const styles = {
@@ -198,7 +198,7 @@ export class Header extends Component {
               isOpenNow: !isOpenNow
             });
 
-            this.onSearchChange(searchQuery);
+            this.onSearchChange(searchTerm);
           }}
         />
         <label htmlFor="isOpenNow">Open Now</label>
@@ -289,7 +289,7 @@ const mapStateToProps = state => ({
   location: applicationSelectors.getLocation(state),
   locationLoaded: applicationSelectors.getLocationLoaded(state),
   places: applicationSelectors.getPlaces(state),
-  searchQuery: applicationSelectors.getSearchQuery(state)
+  searchTerm: applicationSelectors.getSearchTerm(state)
 });
 
 const mapDispatchToProps = dispatch => ({

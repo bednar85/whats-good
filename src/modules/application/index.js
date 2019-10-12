@@ -63,7 +63,7 @@ const updateFilters = payload => ({
   payload
 });
 
-const updateSearchQuery = payload => ({
+const updateSearchTerm = payload => ({
   type: SEARCH_QUERY_UPDATE,
   payload
 });
@@ -74,7 +74,7 @@ export const actions = {
   loadDataSuccess,
   showError,
   updateFilters,
-  updateSearchQuery
+  updateSearchTerm
 };
 
 // Initial State
@@ -91,7 +91,7 @@ const initialState = {
     },
     location: {},
     places: [],
-    searchQuery: ''
+    searchTerm: ''
   },
   errors: {
     location: {
@@ -122,7 +122,7 @@ const dataReducer = (state, action) => {
     case SEARCH_QUERY_UPDATE:
       return {
         ...state,
-        searchQuery: action.payload,
+        searchTerm: action.payload,
         places: initialState.data.places
       };
     default:
