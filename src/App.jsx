@@ -10,19 +10,9 @@ import { actions } from './modules/application';
 
 function App(props) {
   // get the current position on load
-  navigator.geolocation.getCurrentPosition(position => {
-    const { latitude, longitude } = position.coords;
-
-    // this.actions.loadData('location', {
-    //   term: searchQuery,
-    //   position: position.coords
-    // })
-
-    return props.actions.loadData('location', {
-      latitude,
-      longitude
-    });
-  });
+  navigator.geolocation.getCurrentPosition(position =>
+    props.actions.loadData('location', position.coords)
+  );
 
   return (
     <div className="app">
