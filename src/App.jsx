@@ -9,10 +9,16 @@ import PlacesList from './components/PlacesList/PlacesList';
 import { actions } from './modules/application';
 
 function App(props) {
+  // get the current position on load
   navigator.geolocation.getCurrentPosition(position => {
     const { latitude, longitude } = position.coords;
 
-    return props.actions.setCurrentLocation({
+    // this.actions.loadData('location', {
+    //   term: searchQuery,
+    //   position: position.coords
+    // })
+
+    return props.actions.loadData('location', {
       latitude,
       longitude
     });
