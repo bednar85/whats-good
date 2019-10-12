@@ -19,6 +19,27 @@ const getFilters = createSelector(
   }
 );
 
+const getLocationLoaded = createSelector(
+  getLoadedStatus,
+  loadedStatuses => {
+    return loadedStatuses.location;
+  }
+);
+
+const getLocationError = createSelector(
+  getErrors,
+  errors => {
+    return errors.location;
+  }
+);
+
+const getLocation = createSelector(
+  getData,
+  data => {
+    return data.location;
+  }
+);
+
 const getPlacesLoaded = createSelector(
   getLoadedStatus,
   loadedStatuses => {
@@ -52,6 +73,9 @@ const selectors = {
   getErrors,
   getFilters,
   getLoadedStatus,
+  getLocation,
+  getLocationError,
+  getLocationLoaded,
   getPlaces,
   getPlacesError,
   getPlacesLoaded,
