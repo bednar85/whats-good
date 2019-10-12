@@ -72,13 +72,15 @@ function* loadLocationData(action) {
       result.types.includes('neighborhood')
     );
     const neighborhood = neighborhoodResult.address_components[0].long_name;
+    const city = neighborhoodResult.address_components[1].long_name;
 
     const locationData = {
       coordinates: {
         latitude,
         longitude
       },
-      neighborhood
+      neighborhood,
+      city
     };
 
     yield put(actions.loadDataSuccess('location', locationData));
