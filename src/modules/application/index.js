@@ -1,4 +1,5 @@
 // Action Types
+const CURRENT_LOCATION_SET = 'application/CURRENT_LOCATION_SET';
 const DATA_LOAD = 'application/DATA_LOAD';
 const DATA_LOAD_SUCCESS = 'application/DATA_LOAD_SUCCESS';
 const ERROR_HIDE = 'application/ERROR_HIDE';
@@ -7,10 +8,11 @@ const FILTERS_UPDATE = 'application/FILTERS_UPDATE';
 const SEARCH_QUERY_UPDATE = 'application/SEARCH_QUERY_UPDATE';
 
 export const types = {
-  DATA_LOAD,
+  CURRENT_LOCATION_SET,
   DATA_LOAD_SUCCESS,
-  ERROR_SHOW,
+  DATA_LOAD,
   ERROR_HIDE,
+  ERROR_SHOW,
   FILTERS_UPDATE,
   SEARCH_QUERY_UPDATE
 };
@@ -58,6 +60,11 @@ const hideError = key => ({
   }
 });
 
+const setCurrentLocation = payload => ({
+  type: CURRENT_LOCATION_SET,
+  payload
+});
+
 const updateFilters = payload => ({
   type: FILTERS_UPDATE,
   payload
@@ -69,10 +76,11 @@ const updateSearchQuery = payload => ({
 });
 
 export const actions = {
+  hideError,
   loadData,
   loadDataSuccess,
+  setCurrentLocation,
   showError,
-  hideError,
   updateFilters,
   updateSearchQuery
 };
@@ -88,6 +96,7 @@ const initialState = {
       maxDistance: 1.5,
       isOpenNow: false
     },
+    location: {},
     places: [],
     searchQuery: ''
   },
@@ -113,6 +122,13 @@ const dataReducer = (state, action) => {
           ...state.filters,
           ...action.payload
         }
+      };
+    case CURRENT_LOCATION_SET:
+      console.log('action:', action);
+
+      return {
+        ...state,
+        location: action.payload
       };
     case SEARCH_QUERY_UPDATE:
       return {
@@ -145,6 +161,9 @@ const rootReducer = (state = initialState, action) => {
         errors: { ...state.errors, ...action.payload }
       };
     case FILTERS_UPDATE:
+    case CURRENT_LOCATION_SET:
+      console.log('action:', action);
+
       return {
         ...state,
         data: dataReducer(state.data, action)
