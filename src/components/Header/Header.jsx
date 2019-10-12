@@ -15,6 +15,8 @@ import {
   Typography
 } from 'antd';
 
+import Loader from '../Loader/Loader';
+
 import applicationSelectors from '../../modules/application/selectors';
 import { actions } from '../../modules/application';
 
@@ -233,25 +235,30 @@ export class Header extends Component {
 
     return (
       <div className={`${this.baseClass}-search-inputs`}>
-        <Search
-          className={`${this.baseClass}-search-input`}
-          prefix="Find"
-          placeholder="enter a food or drink"
-          onSearch={this.onSearchChange}
-          style={inputStyles}
-          size="large"
-          disabled={!locationLoaded}
-          enterButton
-        />
-        <Search
-          className={`${this.baseClass}-search-input`}
-          prefix="Near"
-          value={neighborhood}
-          onSearch={this.onSearchChange}
-          style={inputStyles}
-          size="large"
-          enterButton={<Icon type="environment" />}
-        />
+        <div className={`${this.baseClass}-search-input-wrapper`}>
+          <Search
+            className={`${this.baseClass}-search-input`}
+            prefix="Find"
+            placeholder="enter a food or drink"
+            onSearch={this.onSearchChange}
+            style={inputStyles}
+            size="large"
+            disabled={!locationLoaded}
+            enterButton
+          />
+        </div>
+        <div className={`${this.baseClass}-search-input-wrapper`}>
+          <Loader loaded={false} asOverlay />
+          <Search
+            className={`${this.baseClass}-search-input`}
+            prefix="Near"
+            value={neighborhood}
+            onSearch={this.onSearchChange}
+            style={inputStyles}
+            size="large"
+            enterButton={<Icon type="environment" />}
+          />
+        </div>
       </div>
     );
   }

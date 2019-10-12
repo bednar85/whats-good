@@ -19,12 +19,20 @@
       font-weight: 700;
     }
 
-    .wg-header-search-input {
+    .wg-header-search-input-wrapper {
+      position: relative;
+
       // add space between each input
       &:not(:last-child) {
         margin-right: 20px;
       }
 
+      .wg-loader-overlay {
+        border-radius: 4px;
+      }
+    }
+
+    .wg-header-search-input {
       .ant-input-affix-wrapper .ant-input {
         padding-left: 50px;
       }
