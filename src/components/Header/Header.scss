@@ -10,9 +10,31 @@
     left: 20px;
   }
 
-  &-search-input {
+  &-search-inputs {
+    display: flex;
+    justify-content: center;
     margin: 0 auto 20px;
-    display: block;
+
+    .ant-input-prefix {
+      font-weight: 700;
+    }
+
+    .wg-header-search-input {
+      // add space between each input
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      .ant-input-affix-wrapper .ant-input {
+        padding-left: 50px;
+      }
+
+      &:nth-child(2) {
+        .ant-input-affix-wrapper .ant-input {
+          padding-left: 55px;
+        }
+      }
+    }
   }
 
   // &-filter-summary {}

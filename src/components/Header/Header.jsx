@@ -7,6 +7,7 @@ import {
   Button,
   Col,
   Drawer,
+  Icon,
   Input,
   Radio,
   Row,
@@ -197,6 +198,35 @@ export class Header extends Component {
     );
   }
 
+  get searchInputs() {
+    const inputStyles = {
+      minWidth: 275,
+      width: '30%'
+    };
+
+    return (
+      <div className={`${this.baseClass}-search-inputs`}>
+        <Search
+          className={`${this.baseClass}-search-input`}
+          prefix="Find"
+          placeholder="enter a food or drink"
+          onSearch={this.onSearchChange}
+          style={inputStyles}
+          size="large"
+          enterButton
+        />
+        <Search
+          className={`${this.baseClass}-search-input`}
+          prefix="Near"
+          onSearch={this.onSearchChange}
+          style={inputStyles}
+          size="large"
+          enterButton={<Icon type="environment" />}
+        />
+      </div>
+    );
+  }
+
   showFilterDrawer() {
     this.setState({
       visible: true
@@ -234,13 +264,7 @@ export class Header extends Component {
         >
           Show Filters
         </Button>
-        <Search
-          className={`${this.baseClass}-search-input`}
-          placeholder="enter a food or drink"
-          onSearch={this.onSearchChange}
-          style={{ width: 200 }}
-          size="large"
-        />
+        {this.searchInputs}
         {this.filterSummary}
       </div>
     );
