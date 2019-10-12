@@ -100,7 +100,7 @@ export class Header extends Component {
       case 'Most Reviewed':
         return 'most reviewed';
       default:
-        return '';
+        return null;
     }
   }
 
@@ -132,8 +132,15 @@ export class Header extends Component {
       case 5:
         return 'bus/subway distance';
       default:
-        return '';
+        return null;
     }
+  }
+
+  get openNowText() {
+    const { filters } = this.props;
+    const { isOpenNow } = filters;
+
+    return isOpenNow ? 'that are open now' : null;
   }
 
   get filterSummary() {
@@ -144,7 +151,8 @@ export class Header extends Component {
     return searchTerm.length ? (
       <Title className={`${this.baseClass}-filter-summary`} level={2}>
         The {this.sortByText} spots to get {searchTermIsSingular && 'a'}{' '}
-        {searchTerm} in {this.locationText} within {this.distanceText} of you.
+        {searchTerm} in {this.locationText} within {this.distanceText} of you{' '}
+        {this.openNowText}.
       </Title>
     ) : null;
   }
