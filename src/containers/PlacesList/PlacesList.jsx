@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 
 import { Rate, Typography } from 'antd';
 
-import { Loader } from '../Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
 
-import applicationSelectors from '../../modules/application/selectors';
-import { actions } from '../../modules/application';
+import applicationSelectors from 'modules/application/selectors';
+import { actions } from 'modules/application';
 
 const { Text, Title } = Typography;
 

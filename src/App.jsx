@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header from './components/Header/Header';
-import PlacesList from './components/PlacesList/PlacesList';
+import Header from 'containers/Header/Header';
+import PlacesList from 'containers/PlacesList/PlacesList';
 
-import { actions } from './modules/application';
+import { actions } from 'modules/application';
 
 function App(props) {
   // get the current location using the Geolocation API and Google Maps API

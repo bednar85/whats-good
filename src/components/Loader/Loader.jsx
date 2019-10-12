@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Spin, Icon } from 'antd';
 
-import Spinner from '../Spinner/Spinner';
+import Spinner from 'components/Spinner/Spinner';
 
 export class Loader extends Component {
   static propTypes = {

@@ -15,10 +15,10 @@ import {
   Typography
 } from 'antd';
 
-import Loader from '../Loader/Loader';
+import Loader from 'components/Loader/Loader';
 
-import applicationSelectors from '../../modules/application/selectors';
-import { actions } from '../../modules/application';
+import applicationSelectors from 'modules/application/selectors';
+import { actions } from 'modules/application';
 
 const { Search } = Input;
 const { Title } = Typography;

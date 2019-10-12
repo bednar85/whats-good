@@ -5,7 +5,9 @@
 @import "css/global";
 
 // Component styles
-@import "components/Header/Header";
 @import "components/Loader/Loader";
-@import "components/PlacesList/PlacesList";
 @import "components/Spinner/Spinner";
+
+// Container styles
+@import "containers/Header/Header";
+@import "containers/PlacesList/PlacesList";

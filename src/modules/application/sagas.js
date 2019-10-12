@@ -2,9 +2,9 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { actions, types } from '.';
-import applicationSelectors from './selectors';
-import { metersToMiles } from '../../utils';
+import { actions, types } from 'modules/application';
+import applicationSelectors from 'modules/application/selectors';
+import { metersToMiles } from 'utils';
 
 function yelpBusinessSearch(params) {
   return axios.get(
