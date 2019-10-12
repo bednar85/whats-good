@@ -57,10 +57,34 @@ function* loadPlacesData(action) {
   }
 }
 
-/**
- * if I need to handle loading data in different ways
- * split the logic here based on the key in action
- */
+function* loadLocationData(action) {
+  const { latitude, longitude } = action.payload;
+
+  try {
+    const googleResponse = yield call(googleMapsReverseGeocode, {
+      latitude,
+      longitude
+    });
+
+    const [neighborhoodResult] = googleResponse.data.results.filter(result =>
+      result.types.includes('neighborhood')
+    );
+    const neighborhood = neighborhoodResult.address_components[0].long_name;
+
+    const locationData = {
+      coordinates: {
+        latitude,
+        longitude
+      },
+      neighborhood
+    };
+
+    yield put(actions.loadDataSuccess('location', locationData));
+  } catch (error) {
+    yield put(actions.showError('location', error.message));
+  }
+}
+
 function* loadDataWorker(action) {
   yield* loadPlacesData(action);
 }
