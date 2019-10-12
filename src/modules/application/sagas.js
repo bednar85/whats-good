@@ -85,10 +85,18 @@ function* loadLocationData(action) {
   }
 }
 
+// Workers
 function* loadDataWorker(action) {
-  yield* loadPlacesData(action);
+  const { key: actionKey } = action.meta;
+
+  if (actionKey === 'places') {
+    yield* loadPlacesData(action);
+  } else if (actionKey === 'location') {
+    yield* loadLocationData(action);
+  }
 }
 
+// Sagas
 export default function* rootSaga() {
   yield takeEvery(types.DATA_LOAD, loadDataWorker);
 }
