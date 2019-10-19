@@ -9,6 +9,7 @@ import {
   Drawer,
   Icon,
   Input,
+  Popover,
   Radio,
   Row,
   Switch,
@@ -88,73 +89,12 @@ export class Header extends Component {
     }
   }
 
-  get sortByText() {
-    const { filters } = this.props;
-    const { sortBy } = filters;
-
-    switch (sortBy) {
-      case 'Closest To You':
-        return 'closest';
-      case 'Highest Rated':
-        return 'highest rated';
-      case 'Most Reviewed':
-        return 'most reviewed';
-      default:
-        return null;
-    }
-  }
-
-  get locationText() {
-    const { filters, location } = this.props;
-    const { maxDistance } = filters;
-    const { neighborhood, city } = location;
-
-    switch (maxDistance) {
-      case 0.5:
-      case 1.5:
-        return neighborhood;
-      case 5:
-        return city;
-      default:
-        return neighborhood;
-    }
-  }
-
-  get distanceText() {
-    const { filters } = this.props;
-    const { maxDistance } = filters;
-
-    switch (maxDistance) {
-      case 0.5:
-        return '4 blocks';
-      case 1.5:
-        return 'walking distance';
-      case 5:
-        return 'bus/subway distance';
-      default:
-        return null;
-    }
-  }
-
-  get openNowText() {
-    const { filters } = this.props;
-    const { isOpenNow } = filters;
-
-    return isOpenNow ? 'that are open now' : null;
-  }
-
-  get filterSummary() {
-    const { searchTerm } = this.props;
-
-    const searchTermIsSingular = searchTerm.slice(-1) !== 's';
-
-    return searchTerm.length ? (
-      <Title className={`${this.baseClass}-filter-summary`} level={2}>
-        The {this.sortByText} spots to get {searchTermIsSingular && 'a'}{' '}
-        {searchTerm} in {this.locationText} within {this.distanceText} of you{' '}
-        {this.openNowText}.
+  get primaryHeading() {
+    return (
+      <Title className={`${this.baseClass}-primary-heading`}>
+        What&apos;s good?
       </Title>
-    ) : null;
+    );
   }
 
   get sortByGroup() {
@@ -271,6 +211,76 @@ export class Header extends Component {
     );
   }
 
+  get sortByText() {
+    const { filters } = this.props;
+    const { sortBy } = filters;
+
+    switch (sortBy) {
+      case 'Closest To You':
+        return 'closest';
+      case 'Highest Rated':
+        return 'highest rated';
+      case 'Most Reviewed':
+        return 'most reviewed';
+      default:
+        return null;
+    }
+  }
+
+  get locationText() {
+    const { filters, location } = this.props;
+    const { maxDistance } = filters;
+    const { neighborhood, city } = location;
+
+    switch (maxDistance) {
+      case 0.5:
+      case 1.5:
+        return neighborhood;
+      case 5:
+        return city;
+      default:
+        return neighborhood;
+    }
+  }
+
+  get distanceText() {
+    const { filters } = this.props;
+    const { maxDistance } = filters;
+
+    switch (maxDistance) {
+      case 0.5:
+        return '4 blocks';
+      case 1.5:
+        return 'walking distance';
+      case 5:
+        return 'bus/subway distance';
+      default:
+        return null;
+    }
+  }
+
+  get openNowText() {
+    const { filters } = this.props;
+    const { isOpenNow } = filters;
+
+    return isOpenNow ? ' that are open now' : null;
+  }
+
+  get filterSummary() {
+    const { searchTerm } = this.props;
+
+    const searchTermIsSingular = searchTerm.slice(-1) !== 's';
+
+    return searchTerm.length ? (
+      <Title className={`${this.baseClass}-filter-summary`} level={2}>
+        The {this.sortByText} spots to get {searchTermIsSingular && 'a'}{' '}
+        {searchTerm.toLowerCase()} in {this.locationText} within{' '}
+        {this.distanceText} of you
+        {this.openNowText}.
+      </Title>
+    ) : null;
+  }
+
   showFilterDrawer() {
     this.setState({
       visible: true
@@ -304,10 +314,10 @@ export class Header extends Component {
         <Button
           className={`${this.baseClass}-show-filters-button`}
           onClick={this.showFilterDrawer}
-          size="large"
         >
           Show Filters
         </Button>
+        {this.primaryHeading}
         {this.searchInputs}
         {this.filterSummary}
       </div>
