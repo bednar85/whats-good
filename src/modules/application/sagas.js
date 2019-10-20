@@ -38,18 +38,21 @@ function* loadPlacesData(action) {
   const { isOpenNow } = filters;
 
   // form the search params
+  /* eslint-disable camelcase */
   const params = {
     term,
     latitude,
     longitude,
     open_now: isOpenNow
   };
+  /* eslint-enable camelcase */
 
   try {
     const response = yield call(yelpBusinessSearch, params);
 
     const placesData = response.data.businesses.map(datum => ({
       ...datum,
+      reviewCount: datum.review_count,
       distance: metersToMiles(datum.distance)
     }));
 

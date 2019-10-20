@@ -64,7 +64,7 @@ export class PlacesList extends Component {
   get places() {
     return this.sortedAndFilteredData.length ? (
       this.sortedAndFilteredData.map(place => {
-        const { distance, id, location, name, rating, review_count } = place;
+        const { distance, id, location, name, rating, reviewCount } = place;
 
         return (
           <div className={this.placeClass} key={id}>
@@ -80,7 +80,7 @@ export class PlacesList extends Component {
                   defaultValue={rating}
                 />
                 <Text className={`${this.placeClass}-reviews`}>
-                  {review_count} Reviews
+                  {reviewCount} Reviews
                 </Text>
               </div>
               <div className={`${this.placeClass}-secondary-content`}>
