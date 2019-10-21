@@ -1,37 +1,43 @@
 // eslint-disable-next-line no-unused-vars
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
 
 import { actions, types } from 'modules/application';
 import applicationSelectors from 'modules/application/selectors';
 import { metersToMiles } from 'utils';
 
+/* eslint-disable camelcase */
 function yelpBusinessSearch(params) {
-  return axios.get(
-    `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`,
+  const { term, latitude, longitude, open_now } = params;
+
+  const openNowParam = open_now ? `&open-now=${open_now}` : '';
+
+  return fetch(
+    `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?$term=${term}&latitude=${latitude}&longitude=${longitude}${openNowParam}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
-      },
-      params
+      }
     }
-  );
+  ).then(response => response.json());
 }
+/* eslint-enable camelcase */
 
 function googleMapsReverseGeocode(params) {
   const { latitude, longitude } = params;
 
-  return axios.get(
+  return fetch(
     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-  );
+  ).then(response => response.json());
 }
 
 function* loadPlacesData(action) {
   // extract data from the payload
   const { term } = action.payload;
-  const { latitude, longitude } = yield select(
-    applicationSelectors.getCoordinates
-  );
+  // replace spaces with + so it is safe for using in the fetch url
+  const querySafeTerm = term.replace(/\s/g, '+');
+
+  const coordinates = yield select(applicationSelectors.getCoordinates);
+  const { latitude, longitude } = coordinates;
 
   // extract data from the store
   const filters = yield select(applicationSelectors.getFilters);
@@ -40,7 +46,7 @@ function* loadPlacesData(action) {
   // form the search params
   /* eslint-disable camelcase */
   const params = {
-    term,
+    term: querySafeTerm,
     latitude,
     longitude,
     open_now: isOpenNow
@@ -48,9 +54,9 @@ function* loadPlacesData(action) {
   /* eslint-enable camelcase */
 
   try {
-    const response = yield call(yelpBusinessSearch, params);
+    const { businesses } = yield call(yelpBusinessSearch, params);
 
-    const placesData = response.data.businesses.map(datum => ({
+    const placesData = businesses.map(datum => ({
       ...datum,
       reviewCount: datum.review_count,
       distance: metersToMiles(datum.distance)
@@ -66,12 +72,12 @@ function* loadLocationData(action) {
   const { latitude, longitude } = action.payload;
 
   try {
-    const googleResponse = yield call(googleMapsReverseGeocode, {
+    const { results } = yield call(googleMapsReverseGeocode, {
       latitude,
       longitude
     });
 
-    const [neighborhoodResult] = googleResponse.data.results.filter(result =>
+    const [neighborhoodResult] = results.filter(result =>
       result.types.includes('neighborhood')
     );
     const neighborhood = neighborhoodResult.address_components[0].long_name;
